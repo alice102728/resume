@@ -1,297 +1,166 @@
 <!DOCTYPE html>
-
 <html lang="zh-TW">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>楊琦如｜履歷</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        html {
+            scroll-behavior: smooth;
+        }
 
-<title>楊琦如｜履歷</title>
+        body {
+            font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+            background: #f5f7fa;
+            color: #263238;
+            line-height: 1.8;
+        }
 
-<style>
-
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    body {
-        font-family:
-            "Noto Sans TC",
-            "Microsoft JhengHei",
-            Arial,
-            sans-serif;
-
-        background: #f5f7fa;
-        color: #263238;
-        line-height: 1.8;
-    }
-
-
-    /* ===== 首頁 ===== */
-
-    .hero {
-        background: linear-gradient(
-            135deg,
-            #eaf2ff,
-            #f8fafc
-        );
-
-        padding: 110px 24px 100px;
-    }
-
-    .hero-container {
-        max-width: 1100px;
-        margin: auto;
-    }
-
-    .hero h1 {
-        font-size: 52px;
-        color: #172b4d;
-        margin-bottom: 10px;
-    }
-
-    .hero h2 {
-        font-size: 22px;
-        font-weight: 400;
-        color: #52616b;
-        margin-bottom: 24px;
-    }
-
-
-    /* ===== 共用區塊 ===== */
-
-    section {
-        max-width: 1100px;
-        margin: auto;
-        padding: 85px 24px;
-    }
-
-    .section-title {
-        font-size: 30px;
-        color: #172b4d;
-        margin-bottom: 12px;
-    }
-
-    .section-subtitle {
-        color: #7b8794;
-        margin-bottom: 40px;
-    }
-
-
-    /* ===== 專案 ===== */
-
-    .projects {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 28px;
-    }
-
-    .project-card {
-        background: white;
-        padding: 35px;
-        border-radius: 18px;
-        border: 1px solid #e8edf3;
-
-        transition: 0.25s;
-    }
-
-    .project-card:hover {
-        transform: translateY(-6px);
-
-        box-shadow:
-            0 15px 35px
-            rgba(15, 23, 42, 0.1);
-    }
-
-    .project-number {
-        color: #2563eb;
-        font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 12px;
-    }
-
-    .project-card h3 {
-        font-size: 22px;
-        color: #172b4d;
-        margin-bottom: 15px;
-    }
-
-    .project-card p {
-        color: #5f6b76;
-        margin-bottom: 20px;
-    }
-
-    .tech-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    .tech {
-        background: #eff6ff;
-        color: #2563eb;
-
-        padding: 5px 11px;
-
-        border-radius: 15px;
-
-        font-size: 13px;
-    }
-
-
-    /* ===== 學歷 ===== */
-
-    .education-card {
-        background: white;
-
-        padding: 35px;
-
-        border-left: 5px solid #2563eb;
-
-        border-radius: 12px;
-
-        box-shadow:
-            0 8px 25px
-            rgba(15, 23, 42, 0.05);
-    }
-
-    .education-card h3 {
-        font-size: 22px;
-        color: #172b4d;
-    }
-
-    .education-card p {
-        color: #68737d;
-    }
-
-
-    /* ===== Footer ===== */
-
-    footer {
-        background: #0f172a;
-
-        color: #94a3b8;
-
-        text-align: center;
-
-        padding: 25px;
-
-        font-size: 14px;
-    }
-
-
-    /* ===== 手機版 ===== */
-
-    @media (max-width: 768px) {
-
+        /* ===== 首頁 ===== */
         .hero {
-            padding: 80px 24px;
+            background: linear-gradient(135deg, #eaf2ff, #f8fafc);
+            padding: 110px 24px 100px;
+        }
+
+        .hero-container {
+            max-width: 1100px;
+            margin: auto;
         }
 
         .hero h1 {
-            font-size: 40px;
+            font-size: 52px;
+            color: #172b4d;
+            margin-bottom: 10px;
         }
 
-        .projects {
-            grid-template-columns: 1fr;
+        .hero h2 {
+            font-size: 22px;
+            font-weight: 400;
+            color: #52616b;
+            margin-bottom: 24px;
         }
 
+        /* ===== 共用區塊 ===== */
         section {
-            padding: 60px 20px;
+            max-width: 1100px;
+            margin: auto;
+            padding: 85px 24px;
         }
 
-    }
+        .section-title {
+            font-size: 30px;
+            color: #172b4d;
+            margin-bottom: 12px;
+        }
 
-</style>
+        .section-subtitle {
+            color: #7b8794;
+            margin-bottom: 40px;
+        }
 
+        /* ===== 專案 ===== */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        .project-card {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            border: 1px solid #e8edf3;
+            transition: 0.25s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1);
+        }
+
+        .project-card h3 {
+            font-size: 22px;
+            color: #172b4d;
+            margin-bottom: 15px;
+        }
+
+        .project-card p {
+            color: #5f6b76;
+            margin-bottom: 0;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        /* ===== 手機版 ===== */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 24px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- ===== 首頁 ===== -->
+    <!-- ===== 首頁 ===== -->
+    <header class="hero">
+        <div class="hero-container">
+            <h1>楊琦如</h1>
+            <h2>銘傳大學｜人工智慧應用學系 碩士</h2>
+        </div>
+    </header>
 
-<header class="hero">
+    <!-- ===== 專案 ===== -->
+    <section id="projects">
+        <h2 class="section-title">專案經歷</h2>
+        <p class="section-subtitle">Projects</p>
 
-    <div class="hero-container">
+        <div class="projects">
 
-        <h1>
-            楊琦如
-        </h1>
+            <!-- 專案 1 -->
+            <div class="project-card">
+                <h3>相對運動場景下之車牌辨識：結合橫向動態模糊補償與時間序列特徵分析</h3>
+                <p>使用 YOLO 進行車牌與字元偵測，結合影像去模糊、清晰度評估、時間序列分析與字元後處理修正，建置適用於移動拍攝情境之臺灣機車車牌辨識系統，提升動態模糊條件下的辨識穩定性與準確率。</p>
+            </div>
 
-        <h2>
-            銘傳大學｜人工智慧應用學系 碩士
-        </h2>
-
-    </div>
-
-</header>
-
-
-<!-- ===== 專案 ===== -->
-
-<section id="projects">
-
-    <h2 class="section-title">
-        專案經歷
-    </h2>
-
-    <p class="section-subtitle">
-        Projects
-    </p>
-
-
-    <div class="projects">
-
-
-        <!-- ===== 專案 1 ===== -->
-
-        <div class="project-card">
-
-            <h3>
-                相對運動場景下之車牌辨識：結合橫向動態模糊補償與時間序列特徵分析相對運動場景下之車牌辨識：結合橫向動態模糊補償與時間序列特徵分析
-            </h3>
-
-            <p>
-                使用YOLO進行車牌與字元偵測，結合像去模糊、清晰度評估、時間序列分析與字元後處理修正，建置適用於移動拍攝情境之臺灣機車車牌辨識系統，提升動態模糊條件下的辨識穩定性與準確率。
-            </p>
+            <!-- 專案 2 -->
+            <div class="project-card">
+                <h3>彩繪社區之 VR 虛擬實境應用</h3>
+                <p>使用 Maya 進行 3D 場景建模，並透過 Unity 建置彩繪社區 VR 虛擬實境，結合實地景觀與彩繪內容，打造沉浸式導覽與互動體驗，達到社區特色數位保存與推廣之目的。</p>
+            </div>
 
         </div>
+    </section>
 
-
-
-        <!-- ===== 專案 2 ===== -->
-
-        <div class="project-card">
-
-            <h3>
-                彩繪社區之VR虛擬實境應用
-            </h3>
-            <p>
-                使用Maya進行3D場景建模，並透過Unity建置彩繪社區VR虛擬實境，結合實地景觀與彩繪內容，打造沉浸式導覽與互動體驗，達到社區特色數位保存與推廣之目的。
-            </p>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- ===== Footer ===== -->
-
-<footer>
-
-
-</footer>
+    <!-- ===== Footer ===== -->
+    <footer>
+    </footer>
 
 </body>
 
