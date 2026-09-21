@@ -1,132 +1,645 @@
 <!DOCTYPE html>
+
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Alice 的履歷</title>
+```
+<title>楊琦如｜個人履歷</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            line-height: 1.8;
-            color: #333;
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            "Noto Sans TC",
+            "Microsoft JhengHei",
+            Arial,
+            sans-serif;
+        background: #f5f7fa;
+        color: #263238;
+        line-height: 1.8;
+    }
+
+    /* ===== 導覽列 ===== */
+
+    nav {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        border-bottom: 1px solid #e5e7eb;
+        backdrop-filter: blur(10px);
+    }
+
+    .nav-container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 16px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1e3a5f;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 24px;
+        list-style: none;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #4b5563;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+        color: #2563eb;
+    }
+
+    /* ===== 首頁 ===== */
+
+    .hero {
+        background: linear-gradient(
+            135deg,
+            #eaf2ff,
+            #f8fafc
+        );
+
+        padding: 110px 24px 100px;
+    }
+
+    .hero-container {
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .hero h1 {
+        font-size: 52px;
+        color: #172b4d;
+        margin-bottom: 10px;
+    }
+
+    .hero h2 {
+        font-size: 22px;
+        font-weight: 400;
+        color: #52616b;
+        margin-bottom: 24px;
+    }
+
+    .hero p {
+        max-width: 720px;
+        color: #5f6b76;
+        font-size: 17px;
+    }
+
+    .tags {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .tag {
+        background: white;
+        color: #2563eb;
+        border: 1px solid #dbeafe;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 14px;
+    }
+
+    /* ===== 共用區塊 ===== */
+
+    section {
+        max-width: 1100px;
+        margin: auto;
+        padding: 85px 24px;
+    }
+
+    .section-title {
+        font-size: 30px;
+        color: #172b4d;
+        margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+        color: #7b8794;
+        margin-bottom: 40px;
+    }
+
+    /* ===== 關於我 ===== */
+
+    .about-card {
+        background: white;
+        padding: 35px;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    /* ===== 技能 ===== */
+
+    .skills {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .skill-card {
+        background: white;
+        padding: 28px;
+        border-radius: 16px;
+        border: 1px solid #edf0f4;
+        transition: 0.25s;
+    }
+
+    .skill-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .skill-card h3 {
+        color: #1e3a5f;
+        margin-bottom: 8px;
+    }
+
+    .skill-card p {
+        color: #68737d;
+        font-size: 15px;
+    }
+
+    /* ===== 專案 ===== */
+
+    .projects {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+    }
+
+    .project-card {
+        background: white;
+        padding: 35px;
+        border-radius: 18px;
+        border: 1px solid #e8edf3;
+        transition: 0.25s;
+    }
+
+    .project-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1);
+    }
+
+    .project-number {
+        color: #2563eb;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 12px;
+    }
+
+    .project-card h3 {
+        font-size: 22px;
+        color: #172b4d;
+        margin-bottom: 15px;
+    }
+
+    .project-card p {
+        color: #5f6b76;
+        margin-bottom: 20px;
+    }
+
+    .tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .tech {
+        background: #eff6ff;
+        color: #2563eb;
+        padding: 5px 11px;
+        border-radius: 15px;
+        font-size: 13px;
+    }
+
+    /* ===== 學歷 ===== */
+
+    .education-card {
+        background: white;
+        padding: 35px;
+        border-left: 5px solid #2563eb;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .education-card h3 {
+        font-size: 22px;
+        color: #172b4d;
+    }
+
+    .education-card p {
+        color: #68737d;
+    }
+
+    /* ===== 聯絡方式 ===== */
+
+    .contact {
+        background: #172b4d;
+        color: white;
+        max-width: none;
+    }
+
+    .contact-inner {
+        max-width: 1100px;
+        margin: auto;
+        padding: 80px 24px;
+    }
+
+    .contact h2 {
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+
+    .contact p {
+        color: #cbd5e1;
+        margin-bottom: 25px;
+    }
+
+    .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .contact-links a {
+        display: inline-block;
+        color: white;
+        text-decoration: none;
+        border: 1px solid #64748b;
+        padding: 10px 18px;
+        border-radius: 8px;
+        transition: 0.2s;
+    }
+
+    .contact-links a:hover {
+        background: #2563eb;
+        border-color: #2563eb;
+    }
+
+    /* ===== Footer ===== */
+
+    footer {
+        background: #0f172a;
+        color: #94a3b8;
+        text-align: center;
+        padding: 25px;
+        font-size: 14px;
+    }
+
+    /* ===== 手機版 ===== */
+
+    @media (max-width: 768px) {
+
+        .nav-container {
+            flex-direction: column;
+            gap: 10px;
         }
 
-        h1 {
+        .nav-links {
+            gap: 14px;
+        }
+
+        .hero {
+            padding: 80px 24px;
+        }
+
+        .hero h1 {
             font-size: 40px;
-            margin-bottom: 5px;
         }
 
-        h2 {
-            border-bottom: 2px solid #333;
-            padding-bottom: 5px;
-            margin-top: 40px;
+        .skills {
+            grid-template-columns: 1fr;
         }
 
-        .job-title {
-            color: #666;
-            font-size: 20px;
+        .projects {
+            grid-template-columns: 1fr;
         }
 
-        .section {
-            margin-top: 20px;
+        section {
+            padding: 60px 20px;
         }
+    }
+</style>
+```
 
-        a {
-            color: #2563eb;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
 
 <body>
 
-    <h1>Alice</h1>
+```
+<!-- ===== 導覽列 ===== -->
 
-    <div class="job-title">
-        軟體工程師 / Software Developer
+<nav>
+    <div class="nav-container">
+
+        <div class="logo">
+            楊琦如
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#about">關於我</a></li>
+            <li><a href="#skills">技能</a></li>
+            <li><a href="#projects">專案</a></li>
+            <li><a href="#education">學歷</a></li>
+            <li><a href="#contact">聯絡</a></li>
+        </ul>
+
+    </div>
+</nav>
+
+
+<!-- ===== 首頁 ===== -->
+
+<header class="hero">
+
+    <div class="hero-container">
+
+        <h1>楊琦如</h1>
+
+        <h2>
+            銘傳大學｜人工智慧應用學系 碩士
+        </h2>
+
+        <p>
+            對人工智慧、電腦視覺與軟體開發具有興趣，
+            曾參與車牌辨識、影像處理、VR 虛擬實境及 3D 建模等專案。
+            致力於將 AI 與軟體技術應用於實際問題。
+        </p>
+
+        <div class="tags">
+            <span class="tag">Artificial Intelligence</span>
+            <span class="tag">Computer Vision</span>
+            <span class="tag">Image Processing</span>
+            <span class="tag">VR</span>
+            <span class="tag">Software Development</span>
+        </div>
+
     </div>
 
-    <p>
-        你好，我是 Alice。
-        這裡是我的線上履歷，主要介紹我的技能、工作經驗與專案。
+</header>
+
+
+<!-- ===== 關於我 ===== -->
+
+<section id="about">
+
+    <h2 class="section-title">
+        關於我
+    </h2>
+
+    <p class="section-subtitle">
+        About Me
     </p>
 
+    <div class="about-card">
 
-    <h2>關於我</h2>
-
-    <div class="section">
         <p>
-            我對軟體開發與資訊技術有興趣，
-            目前正在學習 C#、PHP、Git、SQL 等技術。
+            我畢業於銘傳大學人工智慧應用學系碩士，
+            具備人工智慧、電腦視覺、影像處理及虛擬實境等相關專案經驗。
         </p>
-    </div>
 
+        <br>
 
-    <h2>技能</h2>
-
-    <div class="section">
-        <ul>
-            <li>C#</li>
-            <li>PHP</li>
-            <li>SQL</li>
-            <li>Git / GitHub</li>
-            <li>HTML / CSS</li>
-        </ul>
-    </div>
-
-
-    <h2>工作經歷</h2>
-
-    <div class="section">
-        <h3>公司名稱</h3>
-        <p>職稱｜20XX - 至今</p>
         <p>
-            這裡放你的工作內容與負責的工作。
+            在研究與專案開發過程中，曾使用 YOLO
+            進行車牌與字元偵測，並結合影像去模糊、
+            清晰度評估、時間序列分析與字元後處理，
+            建置適用於移動拍攝情境的臺灣機車車牌辨識系統。
         </p>
-    </div>
 
+        <br>
 
-    <h2>專案</h2>
-
-    <div class="section">
-        <h3>專案名稱</h3>
         <p>
-            這裡介紹你的專案內容、使用的技術以及你負責的部分。
+            另外也曾使用 Maya 進行 3D 場景建模，
+            並透過 Unity 建置 VR 虛擬實境應用，
+            將實際社區景觀轉化為數位互動體驗。
         </p>
+
     </div>
 
+</section>
 
-    <h2>學歷</h2>
 
-    <div class="section">
-        <h3>學校名稱</h3>
-        <p>科系｜20XX - 20XX</p>
+<!-- ===== 技能 ===== -->
+
+<section id="skills">
+
+    <h2 class="section-title">
+        技能
+    </h2>
+
+    <p class="section-subtitle">
+        Skills & Technologies
+    </p>
+
+    <div class="skills">
+
+        <div class="skill-card">
+            <h3>AI / Computer Vision</h3>
+            <p>
+                YOLO、車牌辨識、物件偵測、
+                影像處理、影像去模糊
+            </p>
+        </div>
+
+        <div class="skill-card">
+            <h3>3D / VR</h3>
+            <p>
+                Maya、Unity、3D 建模、
+                虛擬實境與互動場景
+            </p>
+        </div>
+
+        <div class="skill-card">
+            <h3>Software Development</h3>
+            <p>
+                HTML、CSS、Git、GitHub
+            </p>
+        </div>
+
     </div>
 
+</section>
 
-    <h2>聯絡方式</h2>
 
-    <div class="section">
+<!-- ===== 專案 ===== -->
+
+<section id="projects">
+
+    <h2 class="section-title">
+        專案經歷
+    </h2>
+
+    <p class="section-subtitle">
+        Projects
+    </p>
+
+    <div class="projects">
+
+        <!-- 專案 1 -->
+
+        <div class="project-card">
+
+            <div class="project-number">
+                PROJECT 01
+            </div>
+
+            <h3>
+                相對運動場景下之車牌辨識
+            </h3>
+
+            <p>
+                結合橫向動態模糊補償與時間序列特徵分析，
+                建置適用於移動拍攝情境的臺灣機車車牌辨識系統。
+            </p>
+
+            <p>
+                使用 YOLO 進行車牌與字元偵測，
+                並結合影像去模糊、清晰度評估、
+                時間序列分析與字元後處理修正，
+                提升動態模糊條件下的辨識穩定性與準確率。
+            </p>
+
+            <div class="tech-list">
+                <span class="tech">YOLO</span>
+                <span class="tech">Computer Vision</span>
+                <span class="tech">Image Processing</span>
+                <span class="tech">Time Series</span>
+                <span class="tech">License Plate Recognition</span>
+            </div>
+
+        </div>
+
+
+        <!-- 專案 2 -->
+
+        <div class="project-card">
+
+            <div class="project-number">
+                PROJECT 02
+            </div>
+
+            <h3>
+                彩繪社區之 VR 虛擬實境應用
+            </h3>
+
+            <p>
+                使用 Maya 進行 3D 場景建模，
+                並透過 Unity 建置彩繪社區 VR 虛擬實境應用。
+            </p>
+
+            <p>
+                結合實地景觀與彩繪內容，
+                打造沉浸式導覽與互動體驗，
+                達到社區特色數位保存與推廣的目的。
+            </p>
+
+            <div class="tech-list">
+                <span class="tech">Maya</span>
+                <span class="tech">Unity</span>
+                <span class="tech">3D Modeling</span>
+                <span class="tech">VR</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===== 學歷 ===== -->
+
+<section id="education">
+
+    <h2 class="section-title">
+        學歷
+    </h2>
+
+    <p class="section-subtitle">
+        Education
+    </p>
+
+    <div class="education-card">
+
+        <h3>
+            銘傳大學
+        </h3>
+
         <p>
-            GitHub：
-            <a href="https://github.com/alice102728">
-                github.com/alice102728
+            人工智慧應用學系｜碩士
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ===== 聯絡方式 ===== -->
+
+<div class="contact" id="contact">
+
+    <div class="contact-inner">
+
+        <h2>
+            聯絡我
+        </h2>
+
+        <p>
+            如果你想了解我的專案或工作經歷，歡迎與我聯絡。
+        </p>
+
+        <div class="contact-links">
+
+            <a href="https://github.com/alice102728"
+               target="_blank">
+                GitHub
             </a>
-        </p>
 
-        <p>
-            Email：你的 Email
-        </p>
+            <a href="mailto:你的Email">
+                Email
+            </a>
+
+        </div>
+
     </div>
+
+</div>
+
+
+<!-- ===== Footer ===== -->
+
+<footer>
+
+    © 2026 楊琦如 · Personal Resume
+
+</footer>
+```
 
 </body>
 </html>
