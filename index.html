@@ -4,15 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>楊琦如｜履歷</title>
 
-    <!-- 載入 Google Noto Sans TC 字型 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>楊琦如｜履歷</title>
 
     <style>
         /* ===== 基本設定 ===== */
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -24,19 +21,28 @@
         }
 
         body {
-            font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+            font-family:
+                "Noto Sans TC",
+                "Microsoft JhengHei",
+                Arial,
+                sans-serif;
+
             background: #F5F1EA;
             color: #5B625D;
             line-height: 1.8;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* ===== 首頁 / Hero ===== */
+
+        /* ===== 首頁 ===== */
+
         .hero {
-            background: linear-gradient(135deg, #E8E3DA, #DDE5DF);
-            padding: 100px 24px 90px;
+            background: linear-gradient(
+                135deg,
+                #E8E3DA,
+                #DDE5DF
+            );
+
+            padding: 110px 24px 100px;
         }
 
         .hero-container {
@@ -45,188 +51,149 @@
         }
 
         .hero h1 {
-            font-size: 50px;
-            font-weight: 700;
+            font-size: 52px;
             color: #4F5A54;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
+            margin-bottom: 10px;
         }
 
         .hero h2 {
             font-size: 22px;
             font-weight: 400;
             color: #747B75;
-            margin-bottom: 0;
+            margin-bottom: 24px;
         }
 
+
         /* ===== 共用區塊 ===== */
-        main {
-            flex: 1;
-        }
 
         section {
             max-width: 1100px;
             margin: auto;
-            padding: 80px 24px;
+            padding: 85px 24px;
         }
 
         .section-title {
             font-size: 30px;
-            font-weight: 700;
             color: #59635D;
-            margin-bottom: 32px;
-            position: relative;
-            display: inline-block;
+            margin-bottom: 12px;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -8px;
-            width: 40px;
-            height: 3px;
-            background: #B3C0B8;
-            border-radius: 2px;
+        .section-subtitle {
+            color: #918D86;
+            margin-bottom: 40px;
         }
 
-        /* ===== 專案（雙欄網格） ===== */
+
+        /* ===== 專案（雙欄排列關鍵） ===== */
+
         .projects {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 28px;
         }
 
+
         .project-card {
             background: #FFFDF9;
-            padding: 36px;
+            padding: 35px;
             border-radius: 18px;
             border: 1px solid #E5DED3;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-            display: flex;
-            flex-direction: column;
+            transition: 0.25s;
         }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(93, 88, 78, 0.12);
+        }
+
+        /* ===== 可點擊的卡片 ===== */
 
         .project-card.clickable {
             cursor: pointer;
         }
 
-        .project-card.clickable:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 32px rgba(93, 88, 78, 0.12);
-            border-color: #CBD0C9;
-        }
+
+        /* ===== 專案標題 ===== */
 
         .project-card h3 {
-            font-size: 21px;
-            font-weight: 700;
-            color: #4A544F;
-            margin-bottom: 14px;
-            line-height: 1.5;
+            font-size: 22px;
+            color: #59635D;
+            margin-bottom: 15px;
         }
+
+
+        /* ===== 專案文字 ===== */
+
+        .project-card p {
+            color: #77756F;
+            margin-bottom: 0;
+        }
+
+
+        /* ===== 專案圖片 ===== */
+
+        .project-card img {
+            width: 100%;
+            height: 500px;
+            object-fit: contain;
+            background: #F1EDE6;
+            border-radius: 12px;
+            margin-bottom: 22px;
+        }
+
+
+        /* ===== 專案類型標籤 ===== */
 
         .project-card .section-subtitle {
             display: inline-block;
-            align-self: flex-start;
             background: #E8DED8;
             color: #786C67;
-            padding: 4px 14px;
+            padding: 4px 13px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
-            margin-bottom: 16px;
+            margin-bottom: 15px;
         }
 
-        .project-card p {
-            color: #6E6B65;
-            font-size: 15px;
-            line-height: 1.75;
-            margin-bottom: 20px;
-        }
 
-        .card-hint {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            color: #8C948E;
-            font-weight: 500;
-            margin-top: auto;
-        }
+        /* ===== 圖片跳出視窗 ===== */
 
-        /* ===== 圖片跳出視窗 Modal ===== */
         .image-modal {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 999;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(45, 48, 46, 0.6);
-            backdrop-filter: blur(4px);
+            background: rgba(232, 227, 218, 0.92);
             justify-content: center;
             align-items: center;
-            padding: 24px;
-            animation: fadeIn 0.2s ease-out;
+            padding: 40px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* 專案圖片白底容器 - 小巧簡潔，專為去背 PNG 設有亮白背景 */
-        .modal-content-wrapper {
-            position: relative;
-            background: #FFFFFF; /* 純白背景底色，避免去背圖透出背景暗色 */
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
-            max-width: 520px; /* 精緻尺寸控制 */
-            width: 90%;
-            max-height: 75vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #EFEAE1;
-        }
-
-        .modal-content-wrapper img {
-            width: 100%;
-            max-height: 55vh;
+        .image-modal img {
+            width: auto;
+            max-width: 65%;
+            max-height: 75%;
             object-fit: contain;
-            border-radius: 8px;
-            background-color: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(93, 88, 78, 0.18);
         }
 
         .close-button {
             position: absolute;
-            top: -12px;
-            right: -12px;
-            width: 36px;
-            height: 36px;
-            background: #59635D;
-            color: #FFFDF9;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
+            top: 25px;
+            right: 35px;
+            color: #59635D;
+            font-size: 38px;
             cursor: pointer;
             font-weight: 300;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.18);
-            transition: background 0.2s, transform 0.2s;
-            user-select: none;
         }
 
-        .close-button:hover {
-            background: #3E4742;
-            transform: scale(1.08);
-        }
 
         /* ===== Footer ===== */
+
         footer {
             background: #59635D;
             color: #E8E3DA;
@@ -235,18 +202,16 @@
             font-size: 14px;
         }
 
-        /* ===== 響應式微調 ===== */
+
+        /* ===== 手機版自動切回單欄 ===== */
+
         @media (max-width: 768px) {
             .hero {
-                padding: 70px 20px 60px;
+                padding: 80px 24px;
             }
 
             .hero h1 {
-                font-size: 38px;
-            }
-
-            .hero h2 {
-                font-size: 18px;
+                font-size: 40px;
             }
 
             .projects {
@@ -254,17 +219,16 @@
             }
 
             section {
-                padding: 50px 20px;
+                padding: 60px 20px;
             }
 
-            .modal-content-wrapper {
-                max-width: 90%;
-                padding: 16px;
+            .project-card img {
+                height: 350px;
             }
 
-            .close-button {
-                top: -10px;
-                right: -10px;
+            .image-modal img {
+                max-width: 95%;
+                max-height: 85%;
             }
         }
     </style>
@@ -279,57 +243,48 @@
         </div>
     </header>
 
-    <main>
-        <section id="projects">
-            <h2 class="section-title">專案經歷</h2>
 
-            <div class="projects">
+    <section id="projects">
+        <h2 class="section-title">專案經歷</h2>
 
-                <!-- 專案 1 -->
-                <div class="project-card clickable" onclick="openModal('圖片1.png')">
-                    <span class="section-subtitle">碩士論文</span>
-                    <h3>
-                        相對運動場景下之車牌辨識：
-                        結合橫向動態模糊補償與時間序列特徵分析
-                    </h3>
-                    <p>
-                        針對移動拍攝情境下產生的動態模糊與辨識不穩定問題，建置包含車牌偵測、影像去模糊、清晰度判斷、字元辨識及時間序列分析的完整辨識流程。研究過程中，主要使用 Python 進行相關實驗，並應用 YOLO 進行車牌與字元偵測。
-                    </p>
-                    <div class="card-hint">
-                        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                        點擊查看成果圖表
-                    </div>
-                </div>
+        <div class="projects">
 
-                <!-- 專案 2 -->
-                <div class="project-card clickable" onclick="openModal('1702008084283(1).jpg')">
-                    <span class="section-subtitle">大學小組專題</span>
-                    <h3>彩繪社區之 VR 虛擬實境應用</h3>
-                    <p>
-                        使用 MAYA 進行 3D 場景建模，並透過 Unity 建置彩繪社區 VR 虛擬實境，結合實地景觀與彩繪內容，打造沉浸式導覽與互動體驗，達到社區特色數位保存與推廣之目的。
-                    </p>
-                    <div class="card-hint">
-                        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                        點擊查看成果圖表
-                    </div>
-                </div>
+            <!-- 專案 1 -->
+            <div class="project-card clickable" onclick="openModal('圖片1.png')">
+                <h3>
+                    相對運動場景下之車牌辨識：
+                    結合橫向動態模糊補償與時間序列特徵分析
+                </h3>
+                <p class="section-subtitle">碩士論文</p>
+                <p>
+                    針對移動拍攝情境下產生的動態模糊與辨識不穩定問題，建置包含車牌偵測、影像去模糊、清晰度判斷、字元辨識及時間序列分析的完整辨識流程。研究過程中，主要使用Python進行相關實驗，並應用YOLO進行車牌與字元偵測。
+                </p>
+            </div>
 
-            </div> <!-- .projects 結束 -->
-        </section>
-    </main>
+            <!-- 專案 2 -->
+            <div class="project-card clickable" onclick="openModal('1702008084283(1).jpg')">
+                <img src="1702008084283(1).jpg" alt="彩繪社區 VR 虛擬實境專案">
+                <h3>彩繪社區之 VR 虛擬實境應用</h3>
+                <p class="section-subtitle">大學小組專題</p>
+                <p>
+                    使用MAYA進行3D場景建模，並透過Unity建置彩繪社區VR虛擬實境，結合實地景觀與彩繪內容，打造沉浸式導覽與互動體驗，達到社區特色數位保存與推廣之目的。
+                </p>
+            </div>
+
+        </div> <!-- .projects 結束 -->
+    </section>
+
 
     <!-- ===== 共用圖片跳出視窗 ===== -->
     <div id="imageModal" class="image-modal" onclick="closeModal()">
-        <div class="modal-content-wrapper" onclick="event.stopPropagation()">
-            <span class="close-button" onclick="closeModal()" title="關閉">&times;</span>
-            <img id="modalImg" src="" alt="專案展示圖片">
-        </div>
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <img id="modalImg" src="" alt="放大圖片" onclick="event.stopPropagation()">
     </div>
 
+
     <!-- ===== Footer ===== -->
-    <footer>
-        <p>&copy; 楊琦如 ｜ 個人履歷網頁</p>
-    </footer>
+    <footer></footer>
+
 
     <!-- ===== JavaScript ===== -->
     <script>
