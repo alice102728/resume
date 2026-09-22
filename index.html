@@ -130,18 +130,6 @@
         }
 
 
-        /* ===== 專案圖片 ===== */
-
-        .project-card img {
-            width: 100%;
-            height: 500px;
-            object-fit: contain;
-            background: #F1EDE6;
-            border-radius: 12px;
-            margin-bottom: 22px;
-        }
-
-
         /* ===== 專案類型標籤 ===== */
 
         .project-card .section-subtitle {
@@ -222,10 +210,6 @@
                 padding: 60px 20px;
             }
 
-            .project-card img {
-                height: 350px;
-            }
-
             .image-modal img {
                 max-width: 95%;
                 max-height: 85%;
@@ -263,7 +247,6 @@
 
             <!-- 專案 2 -->
             <div class="project-card clickable" onclick="openModal('1702008084283(1).jpg')">
-                <img src="1702008084283(1).jpg" alt="彩繪社區 VR 虛擬實境專案">
                 <h3>彩繪社區之 VR 虛擬實境應用</h3>
                 <p class="section-subtitle">大學小組專題</p>
                 <p>
@@ -278,7 +261,7 @@
     <!-- ===== 共用圖片跳出視窗 ===== -->
     <div id="imageModal" class="image-modal" onclick="closeModal()">
         <span class="close-button" onclick="closeModal()">&times;</span>
-        <img id="modalImg" src="" alt="放大圖片" onclick="event.stopPropagation()">
+        <img id="modalImg" src="" alt="專案展示圖片" onclick="event.stopPropagation()">
     </div>
 
 
