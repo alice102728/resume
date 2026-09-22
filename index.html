@@ -128,6 +128,19 @@
             rgba(93, 88, 78, 0.12);
     }
 
+    /* ===== 可點擊的論文卡片 ===== */
+
+    .project-card.clickable {
+        cursor: pointer;
+    }
+
+    .project-card.clickable:hover {
+        transform: translateY(-6px);
+
+        box-shadow:
+            0 15px 35px
+            rgba(93, 88, 78, 0.12);
+    }
 
     /* ===== 專案標題 ===== */
 
@@ -188,35 +201,6 @@
     }
 
 
-    /* ===== 論文按鈕 ===== */
-
-    .project-button {
-
-        margin-top: 20px;
-
-        padding: 10px 22px;
-
-        background: #59635D;
-
-        color: #FFFDF9;
-
-        border: none;
-
-        border-radius: 25px;
-
-        font-size: 15px;
-
-        cursor: pointer;
-
-        transition: 0.25s;
-    }
-
-
-    .project-button:hover {
-
-        background: #747B75;
-
-    }
 
 
     /* ===== 圖片跳出視窗 ===== */
@@ -333,8 +317,6 @@
 <body>
 
 
-<!-- ===== 首頁 ===== -->
-
 <header class="hero">
 
     <div class="hero-container">
@@ -352,9 +334,6 @@
 </header>
 
 
-
-<!-- ===== 專案 ===== -->
-
 <section id="projects">
 
     <h2 class="section-title">
@@ -362,12 +341,10 @@
     </h2>
 
 
-    <div class="projects">
-
-
-        <!-- ===== 專案 1 ===== -->
-
-        <div class="project-card">
+    <div
+        class="project-card clickable"
+        onclick="openModal()"
+    >
 
             <h3>
                 相對運動場景下之車牌辨識：
