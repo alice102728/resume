@@ -106,7 +106,7 @@
             box-shadow: 0 15px 35px rgba(93, 88, 78, 0.12);
         }
 
-        /* ===== 可點擊的論文卡片 ===== */
+        /* ===== 可點擊的卡片 ===== */
 
         .project-card.clickable {
             cursor: pointer;
@@ -247,11 +247,10 @@
     <section id="projects">
         <h2 class="section-title">專案經歷</h2>
 
-        <!-- 新增 .projects 外框層，實現左右雙欄 -->
         <div class="projects">
 
             <!-- 專案 1 -->
-            <div class="project-card clickable" onclick="openModal()">
+            <div class="project-card clickable" onclick="openModal('圖片1.png')">
                 <h3>
                     相對運動場景下之車牌辨識：
                     結合橫向動態模糊補償與時間序列特徵分析
@@ -263,7 +262,7 @@
             </div>
 
             <!-- 專案 2 -->
-            <div class="project-card">
+            <div class="project-card clickable" onclick="openModal('1702008084283(1).jpg')">
                 <img src="1702008084283(1).jpg" alt="彩繪社區 VR 虛擬實境專案">
                 <h3>彩繪社區之 VR 虛擬實境應用</h3>
                 <p class="section-subtitle">大學小組專題</p>
@@ -276,10 +275,10 @@
     </section>
 
 
-    <!-- ===== 論文圖片跳出視窗 ===== -->
+    <!-- ===== 共用圖片跳出視窗 ===== -->
     <div id="imageModal" class="image-modal" onclick="closeModal()">
         <span class="close-button" onclick="closeModal()">&times;</span>
-        <img src="圖片1.png" alt="碩士論文" onclick="event.stopPropagation()">
+        <img id="modalImg" src="" alt="放大圖片" onclick="event.stopPropagation()">
     </div>
 
 
@@ -289,8 +288,12 @@
 
     <!-- ===== JavaScript ===== -->
     <script>
-        function openModal() {
-            document.getElementById("imageModal").style.display = "flex";
+        function openModal(imgSrc) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImg");
+            
+            modalImg.src = imgSrc;
+            modal.style.display = "flex";
         }
 
         function closeModal() {
