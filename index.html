@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>楊琦如｜履歷</title>
 
+    <!-- 導入 Google Fonts 質感黑體 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,6 +21,7 @@
             --text-muted: #747B75;
             --accent-warm: #8C8275;
             --accent-light: #E8DED8;
+            --accent-pill-bg: #F1EAE1;
             --border-color: #E5DED3;
             --border-hover: #C8BFB3;
             --shadow-soft: 0 4px 15px rgba(93, 88, 78, 0.04);
@@ -45,6 +47,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* 滾動漸顯動畫 */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -56,6 +59,7 @@
             transform: translateY(0);
         }
 
+        /* 導覽列 */
         .navbar {
             position: sticky;
             top: 0;
@@ -91,7 +95,6 @@
             transition: color 0.3s ease;
         }
 
-        /* 導覽連結 Hover & Active 展開底線 */
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -115,6 +118,7 @@
             width: 100%;
         }
 
+        /* Hero 區塊 */
         .hero {
             background: var(--bg-hero);
             padding: 100px 24px 90px;
@@ -125,7 +129,6 @@
             margin: auto;
         }
 
-        /* 姓名大標題 */
         .hero h1 {
             font-size: 52px;
             color: var(--text-primary);
@@ -152,7 +155,7 @@
             width: 100%;
         }
 
-        /* 💥 副標題 Hover 特效：僅保留「字距優雅舒展 + 柔光發光」，無背景框 💥 */
+        /* 副標題 Hover 特效：字距優雅舒展 + 柔光發光（無底框） */
         .hero h2 {
             font-size: 22px;
             font-weight: 400;
@@ -166,8 +169,8 @@
 
         .hero h2:hover {
             color: var(--text-primary);
-            letter-spacing: 3.5px; /* 字距優雅舒展 */
-            text-shadow: 0 0 12px rgba(116, 123, 117, 0.38), 0 0 24px rgba(116, 123, 117, 0.2); /* 柔光發光 */
+            letter-spacing: 3.5px;
+            text-shadow: 0 0 12px rgba(116, 123, 117, 0.38), 0 0 24px rgba(116, 123, 117, 0.2);
         }
 
         section {
@@ -204,6 +207,7 @@
             background-color: var(--text-secondary);
         }
 
+        /* 關於我：Radial Spotlight 跟隨卡片 */
         .about-card {
             position: relative;
             background: var(--bg-card);
@@ -215,7 +219,6 @@
             transition: border-color 0.35s ease, box-shadow 0.35s ease;
         }
 
-        /* Radial Spotlight 微光層 */
         .about-card::before {
             content: '';
             position: absolute;
@@ -256,6 +259,7 @@
             margin-bottom: 0;
         }
 
+        /* 專案區塊 */
         .projects {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -314,6 +318,23 @@
             align-self: flex-start;
         }
 
+        .card-action-hint {
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-warm);
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+
+        .project-card:hover .card-action-hint {
+            color: var(--text-primary);
+            transform: translateX(4px);
+        }
+
+        /* 相片輪播 (Carousel) */
         .carousel-container {
             position: relative;
             width: 100%;
@@ -380,10 +401,6 @@
             transform: translateY(-50%) scale(1.08);
         }
 
-        .carousel-btn:active {
-            transform: translateY(-50%) scale(0.95);
-        }
-
         .carousel-btn.prev { left: 14px; }
         .carousel-btn.next { right: 14px; }
 
@@ -395,7 +412,7 @@
             display: flex;
             gap: 8px;
             z-index: 10;
-            background: rgba(245, 241, 234, 0.7);
+            background: rgba(245, 241, 234, 0.75);
             padding: 6px 12px;
             border-radius: 20px;
             backdrop-filter: blur(4px);
@@ -416,6 +433,7 @@
             border-radius: 10px;
         }
 
+        /* 打工經歷時間軸 */
         .timeline {
             position: relative;
             padding-left: 32px;
@@ -500,15 +518,154 @@
             white-space: nowrap;
         }
 
-        .image-modal {
+        /* 專案詳情彈窗 (Project Detail Modal) */
+        .project-modal {
             display: none;
             position: fixed;
-            z-index: 999;
+            z-index: 950;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(232, 227, 218, 0.94);
+            background: rgba(79, 90, 84, 0.45);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .project-modal-content {
+            background: var(--bg-card);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 820px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(79, 90, 84, 0.22);
+            padding: 40px;
+            position: relative;
+            animation: modalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .project-modal-close {
+            position: absolute;
+            top: 24px;
+            right: 28px;
+            font-size: 32px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+            line-height: 1;
+        }
+
+        .project-modal-close:hover {
+            color: var(--text-primary);
+            transform: scale(1.1);
+        }
+
+        .project-detail-header {
+            margin-bottom: 24px;
+        }
+
+        .project-detail-header h2 {
+            font-size: 25px;
+            color: var(--text-primary);
+            line-height: 1.4;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .project-detail-img-wrapper {
+            width: 100%;
+            background: #F1EDE6;
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 28px;
+            border: 1px solid var(--border-color);
+        }
+
+        .project-detail-img {
+            max-width: 100%;
+            max-height: 360px;
+            object-fit: contain;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .project-detail-img:hover {
+            transform: scale(1.02);
+        }
+
+        .img-hint-text {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* 4 大亮點區塊 Grid 排版 */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .highlight-card {
+            background: var(--accent-pill-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 14px;
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--border-hover);
+        }
+
+        .highlight-title {
+            font-size: 16.5px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .highlight-desc {
+            font-size: 14.5px;
+            color: #636B65;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        /* 圖片全螢幕放大 Lightbox */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(232, 227, 218, 0.95);
             justify-content: center;
             align-items: center;
             padding: 40px;
@@ -518,8 +675,8 @@
 
         .image-modal img {
             width: auto;
-            max-width: 85%;
-            max-height: 82vh;
+            max-width: 88%;
+            max-height: 85vh;
             object-fit: contain;
             border-radius: 12px;
             box-shadow: 0 15px 40px rgba(93, 88, 78, 0.18);
@@ -540,6 +697,7 @@
             color: var(--text-primary);
         }
 
+        /* 回到頂部按鈕 */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -601,6 +759,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+
             section {
                 padding: 55px 20px;
             }
@@ -611,6 +773,10 @@
 
             .about-card {
                 padding: 28px;
+            }
+
+            .project-modal-content {
+                padding: 28px 20px;
             }
 
             .timeline-content {
@@ -670,16 +836,19 @@
 
         <div class="projects">
 
-            <!-- 專案 1：碩士論文 -->
-            <div class="project-card clickable" onclick="openModal('圖片1.png')">
+            <!-- 專案 1：碩士論文 (點擊觸發專案詳情彈窗) -->
+            <div class="project-card clickable" onclick="openProjectModal()">
                 <h3>
                     相對運動場景下之車牌辨識：
                     結合橫向動態模糊補償與時間序列特徵分析
                 </h3>
                 <span class="section-subtitle">碩士論文</span>
                 <p>
-                    針對移動拍攝情境下產生的動態模糊與辨識不穩定問題，建置包含車牌偵測、影像去模糊、清晰度判斷、字元辨識及時間序列分析的完整辨識流程。研究過程中，主要使用Python進行相關實驗，並應用YOLO進行車牌與字元偵測。
+                    針對移動拍攝情境下產生的動態模糊與辨識不穩定問題，建置包含車牌偵測、影像去模糊、清晰度判斷、字元辨識及時間序列分析的完整辨識流程。
                 </p>
+                <div class="card-action-hint">
+                    點擊檢看專案圖文亮點 ➔
+                </div>
             </div>
 
             <!-- 專案 2：VR 專題（含相片輪播 Carousel） -->
@@ -735,7 +904,7 @@
                 <h3>彩繪社區之 VR 虛擬實境應用</h3>
                 <span class="section-subtitle">大學小組專題</span>
                 <p>
-                    使用MAYA進行3D場景建模，並透過Unity建置彩繪社區VR虛擬實境，結合實地景觀與彩繪內容，打造沉浸式導覽與互動體驗，達到社區特色數位保存與推廣之目的。
+                    使用MAYA進行3D場景建模，並透過Unity建置彩繪社區VR虛擬實境，結合實地景觀與彩繪內容，打造沉浸式導覽與互動體驗。
                 </p>
             </div>
 
@@ -786,15 +955,77 @@
         </div>
     </section>
 
+    <!-- 專案 1 詳情彈窗 (Project Detail Modal) -->
+    <div id="projectDetailModal" class="project-modal" onclick="closeProjectModal()">
+        <div class="project-modal-content" onclick="event.stopPropagation()">
+            <span class="project-modal-close" onclick="closeProjectModal()">&times;</span>
+            
+            <div class="project-detail-header">
+                <span class="section-subtitle" style="margin-bottom: 8px;">碩士論文</span>
+                <h2>相對運動場景下之車牌辨識：結合橫向動態模糊補償與時間序列特徵分析</h2>
+            </div>
+
+            <!-- 代表圖片 圖片1.png -->
+            <div class="project-detail-img-wrapper">
+                <img src="圖片1.png" alt="車牌辨識專案架構與結果圖片1" class="project-detail-img" 
+                     onclick="openModal(this.src)"
+                     onerror="this.onerror=null; this.src='https://placehold.co/900x500/E8DED8/59635D?text=%E8%BB%8A%E7%89%8C%E8%BE%A8%E8%AD%98%E5%B0%88%E6%A1%88+%E5%9C%96%E7%89%871.png';" />
+                <div class="img-hint-text">🔍 點擊上方圖片可全螢幕放大檢視</div>
+            </div>
+
+            <!-- 4 大核心亮點 -->
+            <div class="highlights-grid">
+                
+                <div class="highlight-card">
+                    <div class="highlight-title">
+                        🎥 移動攝影機環境適用
+                    </div>
+                    <div class="highlight-desc">
+                        適用於移動的攝影機環境，使應用彈性更大。
+                    </div>
+                </div>
+
+                <div class="highlight-card">
+                    <div class="highlight-title">
+                        🚗 克服橫向模糊問題
+                    </div>
+                    <div class="highlight-desc">
+                        克服橫向拍攝的影像模糊問題，更適於道路行駛中的辨識應用。
+                    </div>
+                </div>
+
+                <div class="highlight-card">
+                    <div class="highlight-title">
+                        📹 影片序列辨識更強健
+                    </div>
+                    <div class="highlight-desc">
+                        基於影片的辨識演算法，較單張影像辨識更具強健性。
+                    </div>
+                </div>
+
+                <div class="highlight-card">
+                    <div class="highlight-title">
+                        🛵 台灣在地化資料庫
+                    </div>
+                    <div class="highlight-desc">
+                        自建以台灣機車車牌為辨識目標的影像資料庫，更貼切於本地應用需求。
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 圖片全螢幕燈箱 Modal -->
     <div id="imageModal" class="image-modal" onclick="closeModal()">
         <span class="close-button" onclick="closeModal()">&times;</span>
         <img id="modalImg" src="" alt="放大圖片" onclick="event.stopPropagation()">
     </div>
 
-    <!-- 回到頂部浮動按鈕 -->
+    <!-- 回到頂部按鈕 -->
     <button id="backToTop" class="back-to-top" onclick="scrollToTop()" title="回到頂部">↑</button>
 
-    <footer></footer>
+    <footer> </footer>
 
     <script>
         /* ===== 1. 關於我卡片：微光游標跟隨 (Radial Spotlight) ===== */
@@ -838,7 +1069,18 @@
 
         sections.forEach(section => navObserver.observe(section));
 
-        /* ===== 4. 相片輪播 (Carousel) 與觸控手勢控制 ===== */
+        /* ===== 4. 專案 1 詳情彈窗邏輯 ===== */
+        function openProjectModal() {
+            document.getElementById("projectDetailModal").style.display = "flex";
+            document.body.style.overflow = "hidden"; // 防止背景滾動
+        }
+
+        function closeProjectModal() {
+            document.getElementById("projectDetailModal").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        /* ===== 5. 相片輪播 (Carousel) 與觸控手勢控制 ===== */
         let currentSlide = 0;
         const totalSlides = 5;
         let autoPlayTimer = null;
@@ -904,7 +1146,7 @@
             }
         }
 
-        /* ===== 5. Modal 放大圖片燈箱控制 ===== */
+        /* ===== 6. Modal 全螢幕放大圖片燈箱控制 ===== */
         function openModal(imgSrc) {
             const modal = document.getElementById("imageModal");
             const modalImg = document.getElementById("modalImg");
@@ -912,7 +1154,7 @@
             modalImg.src = imgSrc;
             modalImg.onerror = function() {
                 this.onerror = null;
-                this.src = 'https://placehold.co/900x600/E8DED8/59635D?text=%E8%BB%8A%E7%89%8C%E8%BE%A8%E8%AD%98%E5%B0%88%E6%A1%88+%E7%A1%9D%E5%A3%AB%E8%AB%96%E6%96%87';
+                this.src = 'https://placehold.co/900x600/E8DED8/59635D?text=%E5%9C%96%E7%89%87%E6%94%BE%E5%A4%A7%E6%AA%A2%E8%A6%96';
             };
             modal.style.display = "flex";
         }
@@ -921,11 +1163,15 @@
             document.getElementById("imageModal").style.display = "none";
         }
 
+        // 按 ESC 鍵可關閉所有彈窗
         document.addEventListener('keydown', (e) => {
-            if (e.key === "Escape") closeModal();
+            if (e.key === "Escape") {
+                closeModal();
+                closeProjectModal();
+            }
         });
 
-        /* ===== 6. 回到頂部按鈕邏輯 ===== */
+        /* ===== 7. 回到頂部按鈕邏輯 ===== */
         const backToTopBtn = document.getElementById("backToTop");
 
         window.addEventListener("scroll", () => {
