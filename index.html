@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>楊琦如｜履歷</title>
+    <title>楊琦如｜個人履歷網站</title>
 
     <!-- 導入 Google Fonts 質感黑體 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -289,6 +289,33 @@
 
         .project-card.clickable {
             cursor: pointer;
+        }
+
+        /* 專案卡片封面圖容器 (尺寸與輪播容器 380px 保持一致) */
+        .project-img-container {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            background: #F1EDE6;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 22px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-img-container img {
+            transform: scale(1.02);
         }
 
         .project-card h3 {
@@ -838,6 +865,10 @@
 
             <!-- 專案 1：碩士論文 (點擊觸發專案詳情彈窗) -->
             <div class="project-card clickable" onclick="openProjectModal()">
+                <div class="project-img-container">
+                    <img src="圖片1.png" alt="相對運動場景下之車牌辨識 封面圖" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=%E8%BB%8A%E7%89%8C%E8%BE%A8%E8%AD%98+%E5%9C%96%E7%89%871.png';" />
+                </div>
                 <h3>
                     相對運動場景下之車牌辨識：
                     結合橫向動態模糊補償與時間序列特徵分析
@@ -847,7 +878,7 @@
                     針對移動拍攝情境下產生的動態模糊與辨識不穩定問題，建置包含車牌偵測、影像去模糊、清晰度判斷、字元辨識及時間序列分析的完整辨識流程。
                 </p>
                 <div class="card-action-hint">
-                    點擊檢看專案圖文亮點 ➔
+                    點擊查看專案圖文亮點 ➔
                 </div>
             </div>
 
@@ -1025,7 +1056,9 @@
     <!-- 回到頂部按鈕 -->
     <button id="backToTop" class="back-to-top" onclick="scrollToTop()" title="回到頂部">↑</button>
 
-    <footer> </footer>
+    <footer>
+        &copy; 楊琦如 履歷作品集 All Rights Reserved.
+    </footer>
 
     <script>
         /* ===== 1. 關於我卡片：微光游標跟隨 (Radial Spotlight) ===== */
