@@ -81,7 +81,7 @@
             transition: color 0.3s;
         }
 
-        /* 動態底線懸停效果 */
+        /* 動態底線懸停與當前區域高亮效果 */
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -93,12 +93,15 @@
             transition: width 0.3s ease-in-out;
         }
 
-        .nav-links a:hover::after {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: #8C8275;
+            font-weight: 600;
         }
 
 
@@ -203,12 +206,13 @@
         }
 
 
-        /* ===== 專案經歷 ===== */
+        /* ===== 專案經歷 (3D 景深傾斜) ===== */
 
         .projects {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 28px;
+            perspective: 1000px; /* 3D 透視景深 */
         }
 
         .project-card {
@@ -216,14 +220,11 @@
             padding: 35px;
             border-radius: 18px;
             border: 1px solid #E5DED3;
-            transition: transform 0.25s, box-shadow 0.25s;
             display: flex;
             flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(93, 88, 78, 0.12);
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease-out, box-shadow 0.25s ease;
+            will-change: transform;
         }
 
         .project-card.clickable {
@@ -548,9 +549,9 @@
     <nav class="navbar">
         <div class="nav-container">
             <ul class="nav-links">
-                <li><a href="#about">關於我</a></li>
-                <li><a href="#projects">專案經歷</a></li>
-                <li><a href="#experience">打工經歷</a></li>
+                <li><a href="#about" id="nav-about">關於我</a></li>
+                <li><a href="#projects" id="nav-projects">專案經歷</a></li>
+                <li><a href="#experience" id="nav-experience">打工經歷</a></li>
             </ul>
         </div>
     </nav>
@@ -697,7 +698,7 @@
     <!-- ===== JavaScript ===== -->
     <script>
         /* --- 1. 滾動漸顯動畫 (Scroll Reveal) --- */
-        const observer = new IntersectionObserver((entries) => {
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
@@ -707,10 +708,57 @@
             threshold: 0.15
         });
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 
-        /* --- 2. 回到頂部按鈕顯示邏輯 --- */
+        /* --- 2. 導覽列滾動自動高亮 (Scrollspy) --- */
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(".nav-links a");
+
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute("id");
+                    navLinks.forEach(link => {
+                        link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+                    });
+                }
+            });
+        }, {
+            rootMargin: "-20% 0px -60% 0px" // 在畫面上中段時自動高亮該區域
+        });
+
+        sections.forEach(section => navObserver.observe(section));
+
+
+        /* --- 3. 專案卡片 3D 景深微傾斜效果 (3D Tilt) --- */
+        const projectCards = document.querySelectorAll('.project-card');
+
+        projectCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                // 計算傾斜角度 (最大約 ±7 度)
+                const rotateX = ((y - centerY) / centerY) * -7;
+                const rotateY = ((x - centerX) / centerX) * 7;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+                card.style.boxShadow = `0 20px 40px rgba(93, 88, 78, 0.16)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+                card.style.boxShadow = `none`;
+            });
+        });
+
+
+        /* --- 4. 回到頂部按鈕顯示邏輯 --- */
         const backToTopBtn = document.getElementById("backToTop");
 
         window.addEventListener("scroll", () => {
@@ -729,7 +777,7 @@
         }
 
 
-        /* --- 3. 輪播與手勢滑動邏輯 --- */
+        /* --- 5. 輪播與手勢滑動邏輯 --- */
         let currentSlide = 0;
         const totalSlides = 5;
 
@@ -783,7 +831,7 @@
         }
 
 
-        /* --- 4. 燈箱圖片彈窗邏輯 --- */
+        /* --- 6. 燈箱圖片彈窗邏輯 --- */
         function openModal(imgSrc) {
             const modal = document.getElementById("imageModal");
             const modalImg = document.getElementById("modalImg");
