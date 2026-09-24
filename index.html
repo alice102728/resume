@@ -4,12 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>楊琦如｜履歷</title>
 
     <style>
-        /* ===== 基本設定 ===== */
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -26,57 +23,65 @@
                 "Microsoft JhengHei",
                 Arial,
                 sans-serif;
-
             background: #F5F1EA;
             color: #5B625D;
             line-height: 1.8;
         }
 
-        /* ===== 頂部導覽列 ===== */
-
         .navbar {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(245, 241, 234, 0.95);
-            backdrop-filter: blur(8px);
+            background: rgba(245, 241, 234, 0.92);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid #E5DED3;
-            padding: 15px 24px;
+            padding: 16px 24px;
         }
 
         .nav-container {
             max-width: 1100px;
             margin: auto;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end; /* 右對齊導覽連結 */
             align-items: center;
-        }
-
-        .nav-logo {
-            font-size: 20px;
-            font-weight: bold;
-            color: #4F5A54;
         }
 
         .nav-links {
             display: flex;
-            gap: 24px;
+            gap: 28px;
             list-style: none;
         }
 
+        /* 導覽列連結動態展開底線效果 */
         .nav-links a {
             text-decoration: none;
             color: #59635D;
-            font-weight: 500;
-            transition: color 0.2s;
+            font-weight: 600;
+            font-size: 15px;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #8C8275;
+            border-radius: 1px;
+            transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .nav-links a:hover {
-            color: #8C8275;
+            color: #4F5A54;
         }
 
-
-        /* ===== 首頁 HERO ===== */
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
         .hero {
             background: linear-gradient(
@@ -84,8 +89,7 @@
                 #E8E3DA,
                 #DDE5DF
             );
-
-            padding: 90px 24px 80px;
+            padding: 95px 24px 85px;
         }
 
         .hero-container {
@@ -93,10 +97,31 @@
             margin: auto;
         }
 
+        /* Hero 楊琦如 大標題動態展開底線 */
         .hero h1 {
             font-size: 52px;
             color: #4F5A54;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            display: inline-block;
+            position: relative;
+            cursor: default;
+        }
+
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background-color: #59635D;
+            border-radius: 2px;
+            transition: width 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .hero h1:hover::after {
+            width: 100%;
         }
 
         .hero h2 {
@@ -105,40 +130,40 @@
             color: #747B75;
         }
 
-
-        /* ===== 共用區塊 ===== */
-
         section {
             max-width: 1100px;
             margin: auto;
-            padding: 70px 24px;
+            padding: 75px 24px;
         }
 
+        /* 章節標題（關於我、專案經歷）動態展開底線 */
         .section-title {
             font-size: 30px;
             color: #59635D;
-            margin-bottom: 24px;
+            margin-bottom: 30px;
+            font-weight: 700;
             position: relative;
             display: inline-block;
+            cursor: pointer;
+            padding-bottom: 6px;
         }
 
         .section-title::after {
             content: '';
-            display: block;
-            width: 40px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 45px; /* 預設提示底線長度 */
             height: 3px;
-            background: #B5ACA0;
-            margin-top: 6px;
+            background-color: #B5ACA0;
             border-radius: 2px;
+            transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
         }
 
-        .section-subtitle {
-            color: #918D86;
-            margin-bottom: 40px;
+        .section-title:hover::after {
+            width: 100%;
+            background-color: #59635D;
         }
-
-
-        /* ===== 關於我 ===== */
 
         .about-card {
             background: #FFFDF9;
@@ -146,6 +171,11 @@
             border-radius: 18px;
             border: 1px solid #E5DED3;
             box-shadow: 0 4px 15px rgba(93, 88, 78, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-card:hover {
+            box-shadow: 0 10px 25px rgba(93, 88, 78, 0.08);
         }
 
         .about-card p {
@@ -159,13 +189,11 @@
             margin-bottom: 0;
         }
 
-
-        /* ===== 專案（雙欄排列關鍵） ===== */
-
         .projects {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 28px;
+            align-items: start;
         }
 
         .project-card {
@@ -173,9 +201,11 @@
             padding: 35px;
             border-radius: 18px;
             border: 1px solid #E5DED3;
-            transition: 0.25s;
+            transition: all 0.3s ease;
+            position: relative;
             display: flex;
             flex-direction: column;
+            height: 100%;
         }
 
         .project-card:hover {
@@ -190,12 +220,14 @@
         .project-card h3 {
             font-size: 22px;
             color: #59635D;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            line-height: 1.4;
         }
 
         .project-card p {
             color: #77756F;
             margin-bottom: 0;
+            text-align: justify;
         }
 
         .project-card .section-subtitle {
@@ -206,11 +238,9 @@
             border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            align-self: flex-start;
         }
-
-
-        /* ===== 輪播容器 (Carousel) ===== */
 
         .carousel-container {
             position: relative;
@@ -218,53 +248,66 @@
             height: 380px;
             background: #F1EDE6;
             border-radius: 12px;
-            margin-bottom: 22px;
             overflow: hidden;
+            margin-bottom: 22px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
+            user-select: none;
+        }
+
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .carousel-slide {
-            width: 100%;
+            min-width: 100%;
             height: 100%;
             display: flex;
-            transition: transform 0.4s ease-in-out;
+            align-items: center;
+            justify-content: center;
+            background: #F1EDE6;
         }
 
         .carousel-slide img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            flex-shrink: 0;
-            cursor: pointer;
+            border-radius: 12px;
         }
 
-        /* 輪播按鈕 */
         .carousel-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(89, 99, 93, 0.6);
+            background: rgba(89, 99, 93, 0.65);
             color: #FFFDF9;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
+            font-size: 18px;
+            transition: background 0.25s, transform 0.2s;
             z-index: 10;
+            backdrop-filter: blur(4px);
         }
 
         .carousel-btn:hover {
             background: rgba(89, 99, 93, 0.9);
+            transform: translateY(-50%) scale(1.08);
         }
 
-        .carousel-btn.prev { left: 12px; }
-        .carousel-btn.next { right: 12px; }
+        .carousel-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
 
-        /* 輪播指示點 */
+        .carousel-btn.prev { left: 14px; }
+        .carousel-btn.next { right: 14px; }
+
         .carousel-dots {
             position: absolute;
             bottom: 12px;
@@ -273,25 +316,26 @@
             display: flex;
             gap: 8px;
             z-index: 10;
+            background: rgba(245, 241, 234, 0.7);
+            padding: 6px 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
         }
 
         .dot {
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.5);
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
+            background: rgba(89, 99, 93, 0.35);
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s ease;
         }
 
         .dot.active {
-            background: #FFFDF9;
-            width: 20px;
+            background: #59635D;
+            width: 24px;
             border-radius: 10px;
         }
-
-
-        /* ===== 圖片跳出視窗 ===== */
 
         .image-modal {
             display: none;
@@ -305,12 +349,13 @@
             justify-content: center;
             align-items: center;
             padding: 40px;
+            backdrop-filter: blur(5px);
         }
 
         .image-modal img {
             width: auto;
             max-width: 85%;
-            max-height: 85%;
+            max-height: 80vh;
             object-fit: contain;
             border-radius: 12px;
             box-shadow: 0 15px 40px rgba(93, 88, 78, 0.18);
@@ -324,10 +369,12 @@
             font-size: 38px;
             cursor: pointer;
             font-weight: 300;
+            transition: color 0.2s;
         }
 
-
-        /* ===== Footer ===== */
+        .close-button:hover {
+            color: #2F3532;
+        }
 
         footer {
             background: #59635D;
@@ -335,19 +382,17 @@
             text-align: center;
             padding: 25px;
             font-size: 14px;
+            letter-spacing: 0.5px;
             margin-top: 40px;
         }
 
-
-        /* ===== 手機版 RWD ===== */
-
         @media (max-width: 768px) {
             .hero {
-                padding: 60px 24px;
+                padding: 70px 24px;
             }
 
             .hero h1 {
-                font-size: 40px;
+                font-size: 38px;
             }
 
             .projects {
@@ -363,7 +408,7 @@
             }
 
             .about-card {
-                padding: 25px;
+                padding: 26px;
             }
         }
     </style>
@@ -371,10 +416,8 @@
 
 <body>
 
-    <!-- 頂部導覽列 -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-logo">楊琦如</div>
             <ul class="nav-links">
                 <li><a href="#about">關於我</a></li>
                 <li><a href="#projects">專案經歷</a></li>
@@ -382,7 +425,6 @@
         </div>
     </nav>
 
-    <!-- 首頁 Hero -->
     <header class="hero">
         <div class="hero-container">
             <h1>楊琦如</h1>
@@ -390,8 +432,6 @@
         </div>
     </header>
 
-
-    <!-- ===== 關於我 ===== -->
     <section id="about">
         <h2 class="section-title">關於我</h2>
         <div class="about-card">
@@ -407,14 +447,12 @@
         </div>
     </section>
 
-
-    <!-- ===== 專案經歷 ===== -->
     <section id="projects">
         <h2 class="section-title">專案經歷</h2>
 
         <div class="projects">
 
-            <!-- 專案 1 -->
+            <!-- 專案 1 (保持點擊彈窗) -->
             <div class="project-card clickable" onclick="openModal('圖片1.png')">
                 <h3>
                     相對運動場景下之車牌辨識：
@@ -426,21 +464,43 @@
                 </p>
             </div>
 
-            <!-- 專案 2 (含圖片輪播) -->
+            <!-- 專案 2 (VR 虛擬實境應用 - 圖片輪播) -->
             <div class="project-card">
-                <div class="carousel-container">
-                    <div class="carousel-slide" id="carouselSlide">
-                        <img src="1702008084283(1).jpg" alt="封面圖" onclick="openModal(this.src)">
-                        <img src="1024x768 (1).jpg" alt="圖片 1" onclick="openModal(this.src)">
-                        <img src="1024x768 (2).jpg" alt="圖片 2" onclick="openModal(this.src)">
-                        <img src="1024x768 (3).jpg" alt="圖片 3" onclick="openModal(this.src)">
-                        <img src="1024x768 (4).jpg" alt="圖片 4" onclick="openModal(this.src)">
+                <div class="carousel-container" id="vrCarousel" onmouseenter="pauseAutoPlay()" onmouseleave="startAutoPlay()">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- 封面圖 (第 1 張) -->
+                        <div class="carousel-slide">
+                            <img src="1702008084283(1).jpg" alt="彩繪社區 VR 專案封面 - 1702008084283(1)" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Cover+1702008084283(1)';" />
+                        </div>
+                        <!-- 輪播圖 2 -->
+                        <div class="carousel-slide">
+                            <img src="1024x768 (1).jpg" alt="彩繪社區 VR 展示圖 1" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(1)';" />
+                        </div>
+                        <!-- 輪播圖 3 -->
+                        <div class="carousel-slide">
+                            <img src="1024x768 (2).jpg" alt="彩繪社區 VR 展示圖 2" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(2)';" />
+                        </div>
+                        <!-- 輪播圖 4 -->
+                        <div class="carousel-slide">
+                            <img src="1024x768 (3).jpg" alt="彩繪社區 VR 展示圖 3" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(3)';" />
+                        </div>
+                        <!-- 輪播圖 5 -->
+                        <div class="carousel-slide">
+                            <img src="1024x768 (4).jpg" alt="彩繪社區 VR 展示圖 4" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(4)';" />
+                        </div>
                     </div>
 
-                    <button class="carousel-btn prev" onclick="prevSlide()">&#10094;</button>
-                    <button class="carousel-btn next" onclick="nextSlide()">&#10095;</button>
+                    <!-- 左右切換按鈕 -->
+                    <button class="carousel-btn prev" onclick="moveSlide(-1)" aria-label="上一張圖片">&#10094;</button>
+                    <button class="carousel-btn next" onclick="moveSlide(1)" aria-label="下一張圖片">&#10095;</button>
 
-                    <div class="carousel-dots">
+                    <!-- 下方指示點 -->
+                    <div class="carousel-dots" id="carouselDots">
                         <span class="dot active" onclick="goToSlide(0)"></span>
                         <span class="dot" onclick="goToSlide(1)"></span>
                         <span class="dot" onclick="goToSlide(2)"></span>
@@ -456,67 +516,111 @@
                 </p>
             </div>
 
-        </div> <!-- .projects 結束 -->
+        </div>
     </section>
 
-
-    <!-- ===== 共用圖片跳出視窗 ===== -->
     <div id="imageModal" class="image-modal" onclick="closeModal()">
         <span class="close-button" onclick="closeModal()">&times;</span>
         <img id="modalImg" src="" alt="放大圖片" onclick="event.stopPropagation()">
     </div>
 
-
-    <!-- ===== Footer ===== -->
     <footer>
-        <p>&copy; 楊琦如 Resume. All Rights Reserved.</p>
+        &copy; 楊琦如 履歷作品集 All Rights Reserved.
     </footer>
 
-
-    <!-- ===== JavaScript ===== -->
     <script>
-        /* --- 輪播邏輯 --- */
-        let currentSlide = 0;
-        const totalSlides = 5;
-
-        function updateSlide() {
-            const slide = document.getElementById("carouselSlide");
-            const dots = document.querySelectorAll(".dot");
-
-            slide.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-            dots.forEach((dot, index) => {
-                dot.classList.toggle("active", index === currentSlide);
-            });
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlide();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSlide();
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateSlide();
-        }
-
-        /* --- 燈箱圖片彈窗邏輯 --- */
+        // ===== Modal 放大圖片控制 (專案 1 專用) =====
         function openModal(imgSrc) {
             const modal = document.getElementById("imageModal");
             const modalImg = document.getElementById("modalImg");
-
+            
             modalImg.src = imgSrc;
+            modalImg.onerror = function() {
+                this.onerror = null;
+                this.src = 'https://placehold.co/900x600/E8DED8/59635D?text=%E8%BB%8A%E7%89%8C%E8%BE%A8%E8%AD%98%E5%B0%88%E6%A1%88+%E7%A1%9D%E5%A3%AB%E8%AB%96%E6%96%87';
+            };
             modal.style.display = "flex";
         }
 
         function closeModal() {
             document.getElementById("imageModal").style.display = "none";
         }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+
+        // ===== 輪播 (Carousel) 控制邏輯 =====
+        let currentSlide = 0;
+        const totalSlides = 5;
+        let autoPlayTimer = null;
+
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            const dots = document.querySelectorAll('.carousel-dots .dot');
+
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function moveSlide(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateCarousel();
+        }
+
+        function startAutoPlay() {
+            if (!autoPlayTimer) {
+                autoPlayTimer = setInterval(() => {
+                    moveSlide(1);
+                }, 4000);
+            }
+        }
+
+        function pauseAutoPlay() {
+            if (autoPlayTimer) {
+                clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+            }
+        }
+
+        // 手勢觸控體驗 (Touch Swipe)
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const carouselContainer = document.getElementById('vrCarousel');
+
+        carouselContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            pauseAutoPlay();
+        }, { passive: true });
+
+        carouselContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            startAutoPlay();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 40;
+            if (touchStartX - touchEndX > swipeThreshold) {
+                moveSlide(1);
+            } else if (touchEndX - touchStartX > swipeThreshold) {
+                moveSlide(-1);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            startAutoPlay();
+        });
     </script>
 
 </body>
