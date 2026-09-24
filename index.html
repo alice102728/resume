@@ -9,6 +9,7 @@
 
     <style>
         /* ===== 基本設定 ===== */
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -25,19 +26,66 @@
                 "Microsoft JhengHei",
                 Arial,
                 sans-serif;
+
             background: #F5F1EA;
             color: #5B625D;
             line-height: 1.8;
         }
 
-        /* ===== 首頁 ===== */
+        /* ===== 頂部導覽列 ===== */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(245, 241, 234, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #E5DED3;
+            padding: 15px 24px;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4F5A54;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #59635D;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #8C8275;
+        }
+
+
+        /* ===== 首頁 HERO ===== */
+
         .hero {
             background: linear-gradient(
                 135deg,
                 #E8E3DA,
                 #DDE5DF
             );
-            padding: 110px 24px 100px;
+
+            padding: 90px 24px 80px;
         }
 
         .hero-container {
@@ -49,28 +97,39 @@
             font-size: 52px;
             color: #4F5A54;
             margin-bottom: 10px;
-            letter-spacing: 1px;
         }
 
         .hero h2 {
             font-size: 22px;
             font-weight: 400;
             color: #747B75;
-            margin-bottom: 24px;
         }
 
+
         /* ===== 共用區塊 ===== */
+
         section {
             max-width: 1100px;
             margin: auto;
-            padding: 85px 24px;
+            padding: 70px 24px;
         }
 
         .section-title {
             font-size: 30px;
             color: #59635D;
-            margin-bottom: 12px;
-            font-weight: 700;
+            margin-bottom: 24px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background: #B5ACA0;
+            margin-top: 6px;
+            border-radius: 2px;
         }
 
         .section-subtitle {
@@ -78,12 +137,35 @@
             margin-bottom: 40px;
         }
 
+
+        /* ===== 關於我 ===== */
+
+        .about-card {
+            background: #FFFDF9;
+            padding: 40px;
+            border-radius: 18px;
+            border: 1px solid #E5DED3;
+            box-shadow: 0 4px 15px rgba(93, 88, 78, 0.04);
+        }
+
+        .about-card p {
+            color: #606863;
+            font-size: 16px;
+            margin-bottom: 18px;
+            text-align: justify;
+        }
+
+        .about-card p:last-child {
+            margin-bottom: 0;
+        }
+
+
         /* ===== 專案（雙欄排列關鍵） ===== */
+
         .projects {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 28px;
-            align-items: start;
         }
 
         .project-card {
@@ -91,11 +173,9 @@
             padding: 35px;
             border-radius: 18px;
             border: 1px solid #E5DED3;
-            transition: all 0.3s ease;
-            position: relative;
+            transition: 0.25s;
             display: flex;
             flex-direction: column;
-            height: 100%;
         }
 
         .project-card:hover {
@@ -103,26 +183,21 @@
             box-shadow: 0 15px 35px rgba(93, 88, 78, 0.12);
         }
 
-        /* ===== 可點擊的卡片 ===== */
         .project-card.clickable {
             cursor: pointer;
         }
 
-        /* ===== 專案標題與內文 ===== */
         .project-card h3 {
             font-size: 22px;
             color: #59635D;
-            margin-bottom: 12px;
-            line-height: 1.4;
+            margin-bottom: 15px;
         }
 
         .project-card p {
             color: #77756F;
             margin-bottom: 0;
-            text-align: justify;
         }
 
-        /* ===== 專案類型標籤 ===== */
         .project-card .section-subtitle {
             display: inline-block;
             background: #E8DED8;
@@ -131,43 +206,35 @@
             border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
-            margin-bottom: 18px;
-            align-self: flex-start;
+            margin-bottom: 15px;
         }
 
-        /* ===== 輪播模組 (Carousel) ===== */
+
+        /* ===== 輪播容器 (Carousel) ===== */
+
         .carousel-container {
             position: relative;
             width: 100%;
             height: 380px;
             background: #F1EDE6;
             border-radius: 12px;
-            overflow: hidden;
             margin-bottom: 22px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
-            user-select: none;
-        }
-
-        .carousel-track {
-            display: flex;
-            height: 100%;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            overflow: hidden;
         }
 
         .carousel-slide {
-            min-width: 100%;
+            width: 100%;
             height: 100%;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #F1EDE6;
+            transition: transform 0.4s ease-in-out;
         }
 
         .carousel-slide img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            border-radius: 12px;
+            flex-shrink: 0;
+            cursor: pointer;
         }
 
         /* 輪播按鈕 */
@@ -175,40 +242,29 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(89, 99, 93, 0.65);
+            background: rgba(89, 99, 93, 0.6);
             color: #FFFDF9;
             border: none;
-            width: 42px;
-            height: 42px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
+            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            transition: background 0.25s, transform 0.2s;
+            transition: 0.2s;
             z-index: 10;
-            backdrop-filter: blur(4px);
         }
 
         .carousel-btn:hover {
             background: rgba(89, 99, 93, 0.9);
-            transform: translateY(-50%) scale(1.08);
         }
 
-        .carousel-btn:active {
-            transform: translateY(-50%) scale(0.95);
-        }
+        .carousel-btn.prev { left: 12px; }
+        .carousel-btn.next { right: 12px; }
 
-        .carousel-btn.prev {
-            left: 14px;
-        }
-
-        .carousel-btn.next {
-            right: 14px;
-        }
-
-        /* 頁碼點指示器 */
+        /* 輪播指示點 */
         .carousel-dots {
             position: absolute;
             bottom: 12px;
@@ -217,28 +273,26 @@
             display: flex;
             gap: 8px;
             z-index: 10;
-            background: rgba(245, 241, 234, 0.7);
-            padding: 6px 12px;
-            border-radius: 20px;
-            backdrop-filter: blur(4px);
         }
 
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            background: rgba(89, 99, 93, 0.35);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: 0.2s;
         }
 
         .dot.active {
-            background: #59635D;
-            width: 24px;
+            background: #FFFDF9;
+            width: 20px;
             border-radius: 10px;
         }
 
-        /* ===== 圖片跳出視窗 (Modal for Project 1) ===== */
+
+        /* ===== 圖片跳出視窗 ===== */
+
         .image-modal {
             display: none;
             position: fixed;
@@ -251,13 +305,12 @@
             justify-content: center;
             align-items: center;
             padding: 40px;
-            backdrop-filter: blur(5px);
         }
 
         .image-modal img {
             width: auto;
             max-width: 85%;
-            max-height: 80vh;
+            max-height: 85%;
             object-fit: contain;
             border-radius: 12px;
             box-shadow: 0 15px 40px rgba(93, 88, 78, 0.18);
@@ -271,31 +324,30 @@
             font-size: 38px;
             cursor: pointer;
             font-weight: 300;
-            transition: color 0.2s;
         }
 
-        .close-button:hover {
-            color: #2F3532;
-        }
 
         /* ===== Footer ===== */
+
         footer {
             background: #59635D;
             color: #E8E3DA;
             text-align: center;
             padding: 25px;
             font-size: 14px;
-            letter-spacing: 0.5px;
+            margin-top: 40px;
         }
 
-        /* ===== 響應式佈局 ===== */
+
+        /* ===== 手機版 RWD ===== */
+
         @media (max-width: 768px) {
             .hero {
-                padding: 80px 24px;
+                padding: 60px 24px;
             }
 
             .hero h1 {
-                font-size: 38px;
+                font-size: 40px;
             }
 
             .projects {
@@ -303,22 +355,15 @@
             }
 
             section {
-                padding: 60px 20px;
+                padding: 50px 20px;
             }
 
             .carousel-container {
                 height: 280px;
             }
 
-            .image-modal img {
-                max-width: 95%;
-                max-height: 85%;
-            }
-
-            .carousel-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 14px;
+            .about-card {
+                padding: 25px;
             }
         }
     </style>
@@ -326,6 +371,18 @@
 
 <body>
 
+    <!-- 頂部導覽列 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">楊琦如</div>
+            <ul class="nav-links">
+                <li><a href="#about">關於我</a></li>
+                <li><a href="#projects">專案經歷</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 首頁 Hero -->
     <header class="hero">
         <div class="hero-container">
             <h1>楊琦如</h1>
@@ -333,60 +390,57 @@
         </div>
     </header>
 
+
+    <!-- ===== 關於我 ===== -->
+    <section id="about">
+        <h2 class="section-title">關於我</h2>
+        <div class="about-card">
+            <p>
+                我畢業於銘傳大學人工智慧應用學系研究所，碩士期間主要投入影像處理與車牌辨識相關研究。碩士論文以「相對運動場景下之車牌辨識」為主題，針對移動拍攝情境下產生的動態模糊與辨識不穩定問題，建置包含車牌偵測、影像去模糊、清晰度判斷、字元辨識及時間序列分析的完整辨識流程。
+            </p>
+            <p>
+                研究過程中，主要使用Python進行相關實驗，並應用YOLO進行車牌與字元偵測。研究內容包含資料集整理、模型訓練與測試及實驗結果分析，在過程中培養了問題分析、資料整理與實驗驗證的能力。
+            </p>
+            <p>
+                大學期間曾參與小組專題研究，以VR虛擬實境為主題，使用Maya建立3D場景，並透過Unity建置彩繪社區VR虛擬實境導覽，累積3D場景建置與VR開發經驗。
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ===== 專案經歷 ===== -->
     <section id="projects">
         <h2 class="section-title">專案經歷</h2>
 
         <div class="projects">
 
-            <!-- 專案 1 (保持點擊彈窗) -->
+            <!-- 專案 1 -->
             <div class="project-card clickable" onclick="openModal('圖片1.png')">
                 <h3>
                     相對運動場景下之車牌辨識：
                     結合橫向動態模糊補償與時間序列特徵分析
                 </h3>
-                <p class="section-subtitle">碩士論文</p>
+                <span class="section-subtitle">碩士論文</span>
                 <p>
                     針對移動拍攝情境下產生的動態模糊與辨識不穩定問題，建置包含車牌偵測、影像去模糊、清晰度判斷、字元辨識及時間序列分析的完整辨識流程。研究過程中，主要使用Python進行相關實驗，並應用YOLO進行車牌與字元偵測。
                 </p>
             </div>
 
-            <!-- 專案 2 (改為圖片輪播，封面為 1702008084283(1).jpg，不再點擊開啟 modal) -->
+            <!-- 專案 2 (含圖片輪播) -->
             <div class="project-card">
-                <div class="carousel-container" id="vrCarousel" onmouseenter="pauseAutoPlay()" onmouseleave="startAutoPlay()">
-                    <div class="carousel-track" id="carouselTrack">
-                        <!-- 封面圖 (第 1 張) -->
-                        <div class="carousel-slide">
-                            <img src="1702008084283(1).jpg" alt="彩繪社區 VR 專案封面 - 1702008084283(1)" 
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Cover+1702008084283(1)';" />
-                        </div>
-                        <!-- 輪播圖 2 -->
-                        <div class="carousel-slide">
-                            <img src="1024x768 (1).jpg" alt="彩繪社區 VR 展示圖 1" 
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(1)';" />
-                        </div>
-                        <!-- 輪播圖 3 -->
-                        <div class="carousel-slide">
-                            <img src="1024x768 (2).jpg" alt="彩繪社區 VR 展示圖 2" 
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(2)';" />
-                        </div>
-                        <!-- 輪播圖 4 -->
-                        <div class="carousel-slide">
-                            <img src="1024x768 (3).jpg" alt="彩繪社區 VR 展示圖 3" 
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(3)';" />
-                        </div>
-                        <!-- 輪播圖 5 -->
-                        <div class="carousel-slide">
-                            <img src="1024x768 (4).jpg" alt="彩繪社區 VR 展示圖 4" 
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(4)';" />
-                        </div>
+                <div class="carousel-container">
+                    <div class="carousel-slide" id="carouselSlide">
+                        <img src="1702008084283(1).jpg" alt="封面圖" onclick="openModal(this.src)">
+                        <img src="1024x768 (1).jpg" alt="圖片 1" onclick="openModal(this.src)">
+                        <img src="1024x768 (2).jpg" alt="圖片 2" onclick="openModal(this.src)">
+                        <img src="1024x768 (3).jpg" alt="圖片 3" onclick="openModal(this.src)">
+                        <img src="1024x768 (4).jpg" alt="圖片 4" onclick="openModal(this.src)">
                     </div>
 
-                    <!-- 左右切換按鈕 -->
-                    <button class="carousel-btn prev" onclick="moveSlide(-1)" aria-label="上一張圖片">&#10094;</button>
-                    <button class="carousel-btn next" onclick="moveSlide(1)" aria-label="下一張圖片">&#10095;</button>
+                    <button class="carousel-btn prev" onclick="prevSlide()">&#10094;</button>
+                    <button class="carousel-btn next" onclick="nextSlide()">&#10095;</button>
 
-                    <!-- 下方圓點指示器 -->
-                    <div class="carousel-dots" id="carouselDots">
+                    <div class="carousel-dots">
                         <span class="dot active" onclick="goToSlide(0)"></span>
                         <span class="dot" onclick="goToSlide(1)"></span>
                         <span class="dot" onclick="goToSlide(2)"></span>
@@ -396,7 +450,7 @@
                 </div>
 
                 <h3>彩繪社區之 VR 虛擬實境應用</h3>
-                <p class="section-subtitle">大學小組專題</p>
+                <span class="section-subtitle">大學小組專題</span>
                 <p>
                     使用MAYA進行3D場景建模，並透過Unity建置彩繪社區VR虛擬實境，結合實地景觀與彩繪內容，打造沉浸式導覽與互動體驗，達到社區特色數位保存與推廣之目的。
                 </p>
@@ -405,651 +459,64 @@
         </div> <!-- .projects 結束 -->
     </section>
 
-    <!-- ===== 共用圖片跳出視窗 (給專案1使用) ===== -->
+
+    <!-- ===== 共用圖片跳出視窗 ===== -->
     <div id="imageModal" class="image-modal" onclick="closeModal()">
         <span class="close-button" onclick="closeModal()">&times;</span>
         <img id="modalImg" src="" alt="放大圖片" onclick="event.stopPropagation()">
     </div>
 
+
     <!-- ===== Footer ===== -->
     <footer>
-        &copy; 楊琦如 履歷作品集 All Rights Reserved.
+        <p>&copy; 楊琦如 Resume. All Rights Reserved.</p>
     </footer>
 
+
+    <!-- ===== JavaScript ===== -->
     <script>
-        // ===== Modal 開關邏輯 (專案 1 專用) =====
+        /* --- 輪播邏輯 --- */
+        let currentSlide = 0;
+        const totalSlides = 5;
+
+        function updateSlide() {
+            const slide = document.getElementById("carouselSlide");
+            const dots = document.querySelectorAll(".dot");
+
+            slide.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle("active", index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlide();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlide();
+        }
+
+        /* --- 燈箱圖片彈窗邏輯 --- */
         function openModal(imgSrc) {
             const modal = document.getElementById("imageModal");
             const modalImg = document.getElementById("modalImg");
-            
+
             modalImg.src = imgSrc;
-            // 當圖片載入失敗時提供備用圖
-            modalImg.onerror = function() {
-                this.onerror = null;
-                this.src = 'https://placehold.co/900x600/E8DED8/59635D?text=%E8%BB%8A%E7%89%8C%E辨%A1%90%E5%B0%88%E6%A1%88+%E7%A1%9D%E5%A3%AB%E8%AB%96%E6%96%87';
-            };
             modal.style.display = "flex";
         }
 
         function closeModal() {
             document.getElementById("imageModal").style.display = "none";
         }
-
-        // 鍵盤 Esc 鍵關閉 Modal
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape") {
-                closeModal();
-            }
-        });
-
-        // ===== 輪播 (Carousel) 控制邏輯 =====
-        let currentSlide = 0;
-        const totalSlides = 5;
-        let autoPlayTimer = null;
-
-        function updateCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const dots = document.querySelectorAll('.carousel-dots .dot');
-
-            // 位移 track
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-            // 更新指示器狀態
-            dots.forEach((dot, index) => {
-                if (index === currentSlide) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        }
-
-        function moveSlide(direction) {
-            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-            updateCarousel();
-        }
-
-        function goToSlide(slideIndex) {
-            currentSlide = slideIndex;
-            updateCarousel();
-        }
-
-        // 自動輪播功能
-        function startAutoPlay() {
-            if (!autoPlayTimer) {
-                autoPlayTimer = setInterval(() => {
-                    moveSlide(1);
-                }, 4000);
-            }
-        }
-
-        function pauseAutoPlay() {
-            if (autoPlayTimer) {
-                clearInterval(autoPlayTimer);
-                autoPlayTimer = null;
-            }
-        }
-
-        // 支援手勢滑動 (Touch Swipe for Mobile Devices)
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        const carouselContainer = document.getElementById('vrCarousel');
-
-        carouselContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-            pauseAutoPlay();
-        }, { passive: true });
-
-        carouselContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-            startAutoPlay();
-        }, { passive: true });
-
-        function handleSwipe() {
-            const swipeThreshold = 40;
-            if (touchStartX - touchEndX > swipeThreshold) {
-                // 向左滑動 -> 下一張
-                moveSlide(1);
-            } else if (touchEndX - touchStartX > swipeThreshold) {
-                // 向右滑動 -> 上一張
-                moveSlide(-1);
-            }
-        }
-
-        // 頁面載入後開啟自動輪播
-        window.addEventListener('load', () => {
-            startAutoPlay();
-        });
-    </script>
-
-</body>
-
-</html><!DOCTYPE html>
-<html lang="zh-TW">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>楊琦如｜履歷</title>
-
-    <style>
-        /* ===== 基本設定 ===== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family:
-                "Noto Sans TC",
-                "Microsoft JhengHei",
-                Arial,
-                sans-serif;
-            background: #F5F1EA;
-            color: #5B625D;
-            line-height: 1.8;
-        }
-
-        /* ===== 首頁 ===== */
-        .hero {
-            background: linear-gradient(
-                135deg,
-                #E8E3DA,
-                #DDE5DF
-            );
-            padding: 110px 24px 100px;
-        }
-
-        .hero-container {
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        .hero h1 {
-            font-size: 52px;
-            color: #4F5A54;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-
-        .hero h2 {
-            font-size: 22px;
-            font-weight: 400;
-            color: #747B75;
-            margin-bottom: 24px;
-        }
-
-        /* ===== 共用區塊 ===== */
-        section {
-            max-width: 1100px;
-            margin: auto;
-            padding: 85px 24px;
-        }
-
-        .section-title {
-            font-size: 30px;
-            color: #59635D;
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-
-        .section-subtitle {
-            color: #918D86;
-            margin-bottom: 40px;
-        }
-
-        /* ===== 專案（雙欄排列關鍵） ===== */
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 28px;
-            align-items: start;
-        }
-
-        .project-card {
-            background: #FFFDF9;
-            padding: 35px;
-            border-radius: 18px;
-            border: 1px solid #E5DED3;
-            transition: all 0.3s ease;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .project-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(93, 88, 78, 0.12);
-        }
-
-        /* ===== 可點擊的卡片 ===== */
-        .project-card.clickable {
-            cursor: pointer;
-        }
-
-        /* ===== 專案標題與內文 ===== */
-        .project-card h3 {
-            font-size: 22px;
-            color: #59635D;
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-
-        .project-card p {
-            color: #77756F;
-            margin-bottom: 0;
-            text-align: justify;
-        }
-
-        /* ===== 專案類型標籤 ===== */
-        .project-card .section-subtitle {
-            display: inline-block;
-            background: #E8DED8;
-            color: #786C67;
-            padding: 4px 13px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 18px;
-            align-self: flex-start;
-        }
-
-        /* ===== 輪播模組 (Carousel) ===== */
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            height: 380px;
-            background: #F1EDE6;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 22px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
-            user-select: none;
-        }
-
-        .carousel-track {
-            display: flex;
-            height: 100%;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .carousel-slide {
-            min-width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #F1EDE6;
-        }
-
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 12px;
-        }
-
-        /* 輪播按鈕 */
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(89, 99, 93, 0.65);
-            color: #FFFDF9;
-            border: none;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            transition: background 0.25s, transform 0.2s;
-            z-index: 10;
-            backdrop-filter: blur(4px);
-        }
-
-        .carousel-btn:hover {
-            background: rgba(89, 99, 93, 0.9);
-            transform: translateY(-50%) scale(1.08);
-        }
-
-        .carousel-btn:active {
-            transform: translateY(-50%) scale(0.95);
-        }
-
-        .carousel-btn.prev {
-            left: 14px;
-        }
-
-        .carousel-btn.next {
-            right: 14px;
-        }
-
-        /* 頁碼點指示器 */
-        .carousel-dots {
-            position: absolute;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-            background: rgba(245, 241, 234, 0.7);
-            padding: 6px 12px;
-            border-radius: 20px;
-            backdrop-filter: blur(4px);
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(89, 99, 93, 0.35);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: #59635D;
-            width: 24px;
-            border-radius: 10px;
-        }
-
-        /* ===== 圖片跳出視窗 (Modal for Project 1) ===== */
-        .image-modal {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(232, 227, 218, 0.92);
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            backdrop-filter: blur(5px);
-        }
-
-        .image-modal img {
-            width: auto;
-            max-width: 85%;
-            max-height: 80vh;
-            object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 15px 40px rgba(93, 88, 78, 0.18);
-        }
-
-        .close-button {
-            position: absolute;
-            top: 25px;
-            right: 35px;
-            color: #59635D;
-            font-size: 38px;
-            cursor: pointer;
-            font-weight: 300;
-            transition: color 0.2s;
-        }
-
-        .close-button:hover {
-            color: #2F3532;
-        }
-
-        /* ===== Footer ===== */
-        footer {
-            background: #59635D;
-            color: #E8E3DA;
-            text-align: center;
-            padding: 25px;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-        }
-
-        /* ===== 響應式佈局 ===== */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 80px 24px;
-            }
-
-            .hero h1 {
-                font-size: 38px;
-            }
-
-            .projects {
-                grid-template-columns: 1fr;
-            }
-
-            section {
-                padding: 60px 20px;
-            }
-
-            .carousel-container {
-                height: 280px;
-            }
-
-            .image-modal img {
-                max-width: 95%;
-                max-height: 85%;
-            }
-
-            .carousel-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 14px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <header class="hero">
-        <div class="hero-container">
-            <h1>楊琦如</h1>
-            <h2>銘傳大學｜人工智慧應用學系</h2>
-        </div>
-    </header>
-
-    <section id="projects">
-        <h2 class="section-title">專案經歷</h2>
-
-        <div class="projects">
-
-            <!-- 專案 1 (保持點擊彈窗) -->
-            <div class="project-card clickable" onclick="openModal('圖片1.png')">
-                <h3>
-                    相對運動場景下之車牌辨識：
-                    結合橫向動態模糊補償與時間序列特徵分析
-                </h3>
-                <p class="section-subtitle">碩士論文</p>
-                <p>
-                    針對移動拍攝情境下產生的動態模糊與辨識不穩定問題，建置包含車牌偵測、影像去模糊、清晰度判斷、字元辨識及時間序列分析的完整辨識流程。研究過程中，主要使用Python進行相關實驗，並應用YOLO進行車牌與字元偵測。
-                </p>
-            </div>
-
-            <!-- 專案 2 (改為圖片輪播，封面為 1702008084283(1).jpg，不再點擊開啟 modal) -->
-            <div class="project-card">
-                <div class="carousel-container" id="vrCarousel" onmouseenter="pauseAutoPlay()" onmouseleave="startAutoPlay()">
-                    <div class="carousel-track" id="carouselTrack">
-                        <!-- 封面圖 (第 1 張) -->
-                        <div class="carousel-slide">
-                            <img src="1702008084283(1).jpg" alt="彩繪社區 VR 專案封面 - 1702008084283(1)" 
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Cover+1702008084283(1)';" />
-                        </div>
-                        <!-- 輪播圖 2 -->
-                        <div class="carousel-slide">
-                            <img src="1024x768 (1).jpg" alt="彩繪社區 VR 展示圖 1" 
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(1)';" />
-                        </div>
-                        <!-- 輪播圖 3 -->
-                        <div class="carousel-slide">
-                            <img src="1024x768 (2).jpg" alt="彩繪社區 VR 展示圖 2" 
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(2)';" />
-                        </div>
-                        <!-- 輪播圖 4 -->
-                        <div class="carousel-slide">
-                            <img src="1024x768 (3).jpg" alt="彩繪社區 VR 展示圖 3" 
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(3)';" />
-                        </div>
-                        <!-- 輪播圖 5 -->
-                        <div class="carousel-slide">
-                            <img src="1024x768 (4).jpg" alt="彩繪社區 VR 展示圖 4" 
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(4)';" />
-                        </div>
-                    </div>
-
-                    <!-- 左右切換按鈕 -->
-                    <button class="carousel-btn prev" onclick="moveSlide(-1)" aria-label="上一張圖片">&#10094;</button>
-                    <button class="carousel-btn next" onclick="moveSlide(1)" aria-label="下一張圖片">&#10095;</button>
-
-                    <!-- 下方圓點指示器 -->
-                    <div class="carousel-dots" id="carouselDots">
-                        <span class="dot active" onclick="goToSlide(0)"></span>
-                        <span class="dot" onclick="goToSlide(1)"></span>
-                        <span class="dot" onclick="goToSlide(2)"></span>
-                        <span class="dot" onclick="goToSlide(3)"></span>
-                        <span class="dot" onclick="goToSlide(4)"></span>
-                    </div>
-                </div>
-
-                <h3>彩繪社區之 VR 虛擬實境應用</h3>
-                <p class="section-subtitle">大學小組專題</p>
-                <p>
-                    使用MAYA進行3D場景建模，並透過Unity建置彩繪社區VR虛擬實境，結合實地景觀與彩繪內容，打造沉浸式導覽與互動體驗，達到社區特色數位保存與推廣之目的。
-                </p>
-            </div>
-
-        </div> <!-- .projects 結束 -->
-    </section>
-
-    <!-- ===== 共用圖片跳出視窗 (給專案1使用) ===== -->
-    <div id="imageModal" class="image-modal" onclick="closeModal()">
-        <span class="close-button" onclick="closeModal()">&times;</span>
-        <img id="modalImg" src="" alt="放大圖片" onclick="event.stopPropagation()">
-    </div>
-
-    <!-- ===== Footer ===== -->
-    <footer>
-        &copy; 楊琦如 履歷作品集 All Rights Reserved.
-    </footer>
-
-    <script>
-        // ===== Modal 開關邏輯 (專案 1 專用) =====
-        function openModal(imgSrc) {
-            const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("modalImg");
-            
-            modalImg.src = imgSrc;
-            // 當圖片載入失敗時提供備用圖
-            modalImg.onerror = function() {
-                this.onerror = null;
-                this.src = 'https://placehold.co/900x600/E8DED8/59635D?text=%E8%BB%8A%E7%89%8C%E辨%A1%90%E5%B0%88%E6%A1%88+%E7%A1%9D%E5%A3%AB%E8%AB%96%E6%96%87';
-            };
-            modal.style.display = "flex";
-        }
-
-        function closeModal() {
-            document.getElementById("imageModal").style.display = "none";
-        }
-
-        // 鍵盤 Esc 鍵關閉 Modal
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape") {
-                closeModal();
-            }
-        });
-
-        // ===== 輪播 (Carousel) 控制邏輯 =====
-        let currentSlide = 0;
-        const totalSlides = 5;
-        let autoPlayTimer = null;
-
-        function updateCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const dots = document.querySelectorAll('.carousel-dots .dot');
-
-            // 位移 track
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-            // 更新指示器狀態
-            dots.forEach((dot, index) => {
-                if (index === currentSlide) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        }
-
-        function moveSlide(direction) {
-            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-            updateCarousel();
-        }
-
-        function goToSlide(slideIndex) {
-            currentSlide = slideIndex;
-            updateCarousel();
-        }
-
-        // 自動輪播功能
-        function startAutoPlay() {
-            if (!autoPlayTimer) {
-                autoPlayTimer = setInterval(() => {
-                    moveSlide(1);
-                }, 4000);
-            }
-        }
-
-        function pauseAutoPlay() {
-            if (autoPlayTimer) {
-                clearInterval(autoPlayTimer);
-                autoPlayTimer = null;
-            }
-        }
-
-        // 支援手勢滑動 (Touch Swipe for Mobile Devices)
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        const carouselContainer = document.getElementById('vrCarousel');
-
-        carouselContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-            pauseAutoPlay();
-        }, { passive: true });
-
-        carouselContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-            startAutoPlay();
-        }, { passive: true });
-
-        function handleSwipe() {
-            const swipeThreshold = 40;
-            if (touchStartX - touchEndX > swipeThreshold) {
-                // 向左滑動 -> 下一張
-                moveSlide(1);
-            } else if (touchEndX - touchStartX > swipeThreshold) {
-                // 向右滑動 -> 上一張
-                moveSlide(-1);
-            }
-        }
-
-        // 頁面載入後開啟自動輪播
-        window.addEventListener('load', () => {
-            startAutoPlay();
-        });
     </script>
 
 </body>
