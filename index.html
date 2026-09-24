@@ -145,10 +145,26 @@
             width: 100%;
         }
 
+        /* 💥 新增：副標題 Hover 質感動效 💥 */
         .hero h2 {
             font-size: 22px;
             font-weight: 400;
             color: #747B75;
+            display: inline-block;
+            padding: 6px 16px;
+            margin-left: -16px; /* 抵消 padding 保持對齊 */
+            border-radius: 30px;
+            letter-spacing: 0px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: default;
+        }
+
+        .hero h2:hover {
+            color: #434B46;
+            letter-spacing: 2.5px; /* 字距優雅拉開 */
+            background: rgba(255, 253, 249, 0.65); /* 柔和白色底色 */
+            box-shadow: 0 4px 18px rgba(93, 88, 78, 0.08); /* 淡陰影 */
+            text-shadow: 0 0 10px rgba(116, 123, 117, 0.2);
         }
 
 
@@ -197,7 +213,6 @@
             transition: border-color 0.35s ease, box-shadow 0.35s ease;
         }
 
-        /* 游標跟隨微光圖層 */
         .about-card::before {
             content: '';
             position: absolute;
@@ -227,7 +242,7 @@
 
         .about-card p {
             position: relative;
-            z-index: 1; /* 確保文字在光暈之上 */
+            z-index: 1;
             color: #606863;
             font-size: 16px;
             margin-bottom: 18px;
@@ -260,7 +275,6 @@
                         border-color 0.35s ease;
         }
 
-        /* 優雅平滑升起 + 柔和陰影與邊框亮化 */
         .project-card:hover {
             transform: translateY(-8px);
             border-color: #B5ACA0;
@@ -554,6 +568,11 @@
                 font-size: 40px;
             }
 
+            .hero h2 {
+                font-size: 18px;
+                margin-left: 0;
+            }
+
             .projects {
                 grid-template-columns: 1fr;
             }
@@ -742,7 +761,7 @@
 
     <!-- ===== JavaScript ===== -->
     <script>
-        /* --- 1. 關於我卡片：微光游標跟隨 (Radial Spotlight) --- */
+        /* --- 1. 關於我卡片：微光游標跟隨 --- */
         const aboutCard = document.getElementById('aboutCard');
         if (aboutCard) {
             aboutCard.addEventListener('mousemove', (e) => {
