@@ -184,17 +184,50 @@
         }
 
 
-        /* ===== 關於我 ===== */
+        /* ===== 關於我 (含微光游標跟隨) ===== */
 
         .about-card {
+            position: relative;
             background: #FFFDF9;
             padding: 40px;
             border-radius: 18px;
             border: 1px solid #E5DED3;
             box-shadow: 0 4px 15px rgba(93, 88, 78, 0.04);
+            overflow: hidden;
+            transition: border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        /* 游標跟隨微光圖層 */
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                500px circle at var(--x, 50%) var(--y, 50%),
+                rgba(216, 208, 197, 0.35),
+                transparent 50%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        .about-card:hover::before {
+            opacity: 1;
+        }
+
+        .about-card:hover {
+            border-color: #C8BFB3;
+            box-shadow: 0 10px 30px rgba(93, 88, 78, 0.08);
         }
 
         .about-card p {
+            position: relative;
+            z-index: 1; /* 確保文字在光暈之上 */
             color: #606863;
             font-size: 16px;
             margin-bottom: 18px;
@@ -206,7 +239,7 @@
         }
 
 
-        /* ===== 專案經歷 (極簡高級感懸停) ===== */
+        /* ===== 專案經歷 ===== */
 
         .projects {
             display: grid;
@@ -290,7 +323,7 @@
         }
 
         .carousel-slide img:hover {
-            transform: scale(1.02); /* 輪播圖片懸停微放大 */
+            transform: scale(1.02);
         }
 
         .carousel-btn {
@@ -580,7 +613,7 @@
     <!-- ===== 關於我 ===== -->
     <section id="about" class="reveal">
         <h2 class="section-title">關於我</h2>
-        <div class="about-card">
+        <div class="about-card" id="aboutCard">
             <p>
                 我畢業於銘傳大學人工智慧應用學系研究所，碩士期間主要投入影像處理與車牌辨識相關研究。碩士論文以「相對運動場景下之車牌辨識」為主題，針對移動拍攝情境下產生的動態模糊與辨識不穩定問題，建置包含車牌偵測、影像去模糊、清晰度判斷、字元辨識及時間序列分析的完整辨識流程。
             </p>
@@ -709,7 +742,21 @@
 
     <!-- ===== JavaScript ===== -->
     <script>
-        /* --- 1. 滾動漸顯動畫 (Scroll Reveal) --- */
+        /* --- 1. 關於我卡片：微光游標跟隨 (Radial Spotlight) --- */
+        const aboutCard = document.getElementById('aboutCard');
+        if (aboutCard) {
+            aboutCard.addEventListener('mousemove', (e) => {
+                const rect = aboutCard.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                aboutCard.style.setProperty('--x', `${x}px`);
+                aboutCard.style.setProperty('--y', `${y}px`);
+            });
+        }
+
+
+        /* --- 2. 滾動漸顯動畫 (Scroll Reveal) --- */
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -723,7 +770,7 @@
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 
-        /* --- 2. 導覽列滾動自動高亮 (Scrollspy) --- */
+        /* --- 3. 導覽列滾動自動高亮 (Scrollspy) --- */
         const sections = document.querySelectorAll("section[id]");
         const navLinks = document.querySelectorAll(".nav-links a");
 
@@ -743,7 +790,7 @@
         sections.forEach(section => navObserver.observe(section));
 
 
-        /* --- 3. 回到頂部按鈕顯示邏輯 --- */
+        /* --- 4. 回到頂部按鈕顯示邏輯 --- */
         const backToTopBtn = document.getElementById("backToTop");
 
         window.addEventListener("scroll", () => {
@@ -762,7 +809,7 @@
         }
 
 
-        /* --- 4. 輪播與手勢滑動邏輯 --- */
+        /* --- 5. 輪播與手勢滑動邏輯 --- */
         let currentSlide = 0;
         const totalSlides = 5;
 
@@ -816,7 +863,7 @@
         }
 
 
-        /* --- 5. 燈箱圖片彈窗邏輯 --- */
+        /* --- 6. 燈箱圖片彈窗邏輯 --- */
         function openModal(imgSrc) {
             const modal = document.getElementById("imageModal");
             const modalImg = document.getElementById("modalImg");
