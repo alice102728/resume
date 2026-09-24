@@ -145,26 +145,23 @@
             width: 100%;
         }
 
-        /* 💥 新增：副標題 Hover 質感動效 💥 */
+        /* ===== 副標題：字距優雅舒展 + 柔光發光特效 ===== */
         .hero h2 {
             font-size: 22px;
             font-weight: 400;
             color: #747B75;
             display: inline-block;
-            padding: 6px 16px;
-            margin-left: -16px; /* 抵消 padding 保持對齊 */
-            border-radius: 30px;
             letter-spacing: 0px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: color 0.4s ease, letter-spacing 0.4s ease, text-shadow 0.4s ease;
             cursor: default;
         }
 
         .hero h2:hover {
-            color: #434B46;
-            letter-spacing: 2.5px; /* 字距優雅拉開 */
-            background: rgba(255, 253, 249, 0.65); /* 柔和白色底色 */
-            box-shadow: 0 4px 18px rgba(93, 88, 78, 0.08); /* 淡陰影 */
-            text-shadow: 0 0 10px rgba(116, 123, 117, 0.2);
+            color: #3C443F;
+            letter-spacing: 3px; /* 滑鼠移上去時字距優雅舒展 */
+            text-shadow: 
+                0 0 12px rgba(116, 123, 117, 0.35),
+                0 0 24px rgba(216, 208, 197, 0.6); /* 大地色溫暖柔光發光 */
         }
 
 
@@ -548,7 +545,7 @@
         }
 
 
-        /* ===== Footer 色塊 ===== */
+        /* ===== Footer ===== */
 
         footer {
             background: #59635D;
@@ -570,7 +567,6 @@
 
             .hero h2 {
                 font-size: 18px;
-                margin-left: 0;
             }
 
             .projects {
