@@ -30,6 +30,20 @@
             background: #F5F1EA;
             color: #5B625D;
             line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ===== 滾動漸顯動畫 (Scroll Reveal) ===== */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* ===== 頂部導覽列 ===== */
@@ -67,6 +81,7 @@
             transition: color 0.3s;
         }
 
+        /* 動態底線懸停效果 */
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -165,11 +180,6 @@
             width: 100%;
         }
 
-        .section-subtitle {
-            color: #918D86;
-            margin-bottom: 40px;
-        }
-
 
         /* ===== 關於我 ===== */
 
@@ -206,7 +216,7 @@
             padding: 35px;
             border-radius: 18px;
             border: 1px solid #E5DED3;
-            transition: 0.25s;
+            transition: transform 0.25s, box-shadow 0.25s;
             display: flex;
             flex-direction: column;
         }
@@ -330,7 +340,6 @@
             margin-top: 10px;
         }
 
-        /* 垂直軸線 */
         .timeline::before {
             content: '';
             position: absolute;
@@ -350,7 +359,6 @@
             margin-bottom: 0;
         }
 
-        /* 時間軸圓點 */
         .timeline-dot {
             position: absolute;
             left: -30px;
@@ -361,7 +369,7 @@
             background: #B5ACA0;
             border: 3px solid #F5F1EA;
             box-shadow: 0 0 0 2px #B5ACA0;
-            transition: background 0.3s;
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
         .timeline-item:hover .timeline-dot {
@@ -377,7 +385,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: 0.25s ease;
+            transition: transform 0.25s, box-shadow 0.25s;
         }
 
         .timeline-content:hover {
@@ -444,6 +452,42 @@
         }
 
 
+        /* ===== 回到頂部按鈕 ===== */
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            background: rgba(89, 99, 93, 0.75);
+            color: #FFFDF9;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease, background-color 0.2s ease;
+            z-index: 90;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: rgba(89, 99, 93, 0.95);
+            transform: translateY(-4px);
+        }
+
+
         /* ===== Footer 色塊 ===== */
 
         footer {
@@ -486,6 +530,14 @@
                 gap: 12px;
                 padding: 20px;
             }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 42px;
+                height: 42px;
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -513,7 +565,7 @@
 
 
     <!-- ===== 關於我 ===== -->
-    <section id="about">
+    <section id="about" class="reveal">
         <h2 class="section-title">關於我</h2>
         <div class="about-card">
             <p>
@@ -530,7 +582,7 @@
 
 
     <!-- ===== 專案經歷 ===== -->
-    <section id="projects">
+    <section id="projects" class="reveal">
         <h2 class="section-title">專案經歷</h2>
 
         <div class="projects">
@@ -582,7 +634,7 @@
 
 
     <!-- ===== 打工經歷 ===== -->
-    <section id="experience">
+    <section id="experience" class="reveal">
         <h2 class="section-title">打工經歷</h2>
 
         <div class="timeline">
@@ -634,13 +686,50 @@
     </div>
 
 
+    <!-- ===== 回到頂部按鈕 ===== -->
+    <button id="backToTop" class="back-to-top" onclick="scrollToTop()" title="回到頂部">↑</button>
+
+
     <!-- ===== Footer ===== -->
     <footer></footer>
 
 
     <!-- ===== JavaScript ===== -->
     <script>
-        /* --- 輪播與手勢滑動邏輯 --- */
+        /* --- 1. 滾動漸顯動畫 (Scroll Reveal) --- */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+        /* --- 2. 回到頂部按鈕顯示邏輯 --- */
+        const backToTopBtn = document.getElementById("backToTop");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > window.innerHeight) {
+                backToTopBtn.classList.add("show");
+            } else {
+                backToTopBtn.classList.remove("show");
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+
+        /* --- 3. 輪播與手勢滑動邏輯 --- */
         let currentSlide = 0;
         const totalSlides = 5;
 
@@ -693,7 +782,8 @@
             }
         }
 
-        /* --- 燈箱圖片彈窗邏輯 --- */
+
+        /* --- 4. 燈箱圖片彈窗邏輯 --- */
         function openModal(imgSrc) {
             const modal = document.getElementById("imageModal");
             const modalImg = document.getElementById("modalImg");
