@@ -141,7 +141,7 @@
             padding: 70px 24px;
         }
 
-        /* 💥 分頁控制 CSS 💥 */
+        /* 分頁控制 CSS */
         .tab-content {
             display: none; /* 預設隱藏所有分頁 */
         }
@@ -454,18 +454,44 @@
 
         .timeline-content {
             background: #FFFDF9;
-            padding: 24px 30px;
+            padding: 20px 24px;
             border-radius: 16px;
             border: 1px solid #E5DED3;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
             transition: transform 0.25s, box-shadow 0.25s;
         }
 
         .timeline-content:hover {
             transform: translateX(6px);
             box-shadow: 0 8px 25px rgba(93, 88, 78, 0.08);
+        }
+
+        /* 左側圖片與文字區塊 */
+        .job-info-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* 工作小縮圖 */
+        .job-thumb {
+            width: 68px;
+            height: 68px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1px solid #E5DED3;
+            background: #F1EDE6;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .job-thumb:hover {
+            transform: scale(1.06);
+            box-shadow: 0 4px 12px rgba(89, 99, 93, 0.18);
         }
 
         .job-title {
@@ -730,8 +756,15 @@
             .timeline-content {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 12px;
-                padding: 20px;
+                gap: 14px;
+            }
+
+            .job-info-group {
+                width: 100%;
+            }
+
+            .job-period {
+                align-self: flex-start;
             }
 
             .back-to-top {
@@ -751,7 +784,6 @@
     <nav class="navbar">
         <div class="nav-container">
             <ul class="nav-links">
-                <!-- 💥 新增 onclick 觸發 switchTab 分頁函數 💥 -->
                 <li><a class="nav-item active" onclick="switchTab('about')">關於我</a></li>
                 <li><a class="nav-item" onclick="switchTab('projects')">專案經歷</a></li>
                 <li><a class="nav-item" onclick="switchTab('experience')">打工經歷</a></li>
@@ -848,37 +880,46 @@
 
         <div class="timeline">
 
-            <!-- 經歷 1 -->
+            <!-- 經歷 1：帶場工讀生 -->
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <div>
-                        <div class="job-title">帶場工讀生</div>
-                        <div class="company-name">迷失地工作室</div>
+                    <div class="job-info-group">
+                        <img src="images3.jpg" alt="迷失地工作室" class="job-thumb" title="點擊放大觀看" onclick="openImageModal(this.src)">
+                        <div>
+                            <div class="job-title">帶場工讀生</div>
+                            <div class="company-name">迷失地工作室</div>
+                        </div>
                     </div>
                     <div class="job-period">2025/08 – 2026/02</div>
                 </div>
             </div>
 
-            <!-- 經歷 2 -->
+            <!-- 經歷 2：盒玩店門市人員 -->
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <div>
-                        <div class="job-title">盒玩店門市人員</div>
-                        <div class="company-name">兔兔讚有限公司</div>
+                    <div class="job-info-group">
+                        <img src="images2.jpg" alt="兔兔讚有限公司" class="job-thumb" title="點擊放大觀看" onclick="openImageModal(this.src)">
+                        <div>
+                            <div class="job-title">盒玩店門市人員</div>
+                            <div class="company-name">兔兔讚有限公司</div>
+                        </div>
                     </div>
                     <div class="job-period">2024/02 – 2024/08</div>
                 </div>
             </div>
 
-            <!-- 經歷 3 -->
+            <!-- 經歷 3：接待中心工讀生 -->
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <div>
-                        <div class="job-title">接待中心工讀生</div>
-                        <div class="company-name">甲桂林廣告股份有限公司</div>
+                    <div class="job-info-group">
+                        <img src="images1.jpg" alt="甲桂林廣告" class="job-thumb" title="點擊放大觀看" onclick="openImageModal(this.src)">
+                        <div>
+                            <div class="job-title">接待中心工讀生</div>
+                            <div class="company-name">甲桂林廣告股份有限公司</div>
+                        </div>
                     </div>
                     <div class="job-period">2023/09 – 2024/02</div>
                 </div>
@@ -935,26 +976,21 @@
 
     <!-- ===== JavaScript ===== -->
     <script>
-        /* --- 💥 1. 單頁 Tab 分頁切換核心邏輯 💥 --- */
+        /* --- 1. 單頁 Tab 分頁切換核心邏輯 --- */
         function switchTab(tabId) {
-            // A. 隱藏所有分頁 (.tab-content)
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.remove('active'));
 
-            // B. 顯示點擊目標分頁
             const targetTab = document.getElementById(tabId);
             if (targetTab) {
                 targetTab.classList.add('active');
             }
 
-            // C. 更新導覽列按鈕高亮狀態
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => item.classList.remove('active'));
 
-            // 抓取觸發點擊的導覽列項目
             event.target.classList.add('active');
 
-            // D. 切換分頁時平滑捲動回上方
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
