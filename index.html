@@ -4,29 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>楊琦如｜履歷</title>
 
-    <!-- 導入 Google Fonts 質感黑體 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
     <style>
-        :root {
-            --bg-main: #F5F1EA;
-            --bg-card: #FFFDF9;
-            --bg-hero: linear-gradient(135deg, #E8E3DA, #DDE5DF);
-            --text-primary: #4F5A54;
-            --text-secondary: #5B625D;
-            --text-muted: #747B75;
-            --accent-warm: #8C8275;
-            --accent-light: #E8DED8;
-            --accent-pill-bg: #F1EAE1;
-            --border-color: #E5DED3;
-            --border-hover: #C8BFB3;
-            --shadow-soft: 0 4px 15px rgba(93, 88, 78, 0.04);
-            --shadow-hover: 0 16px 32px rgba(93, 88, 78, 0.1);
-        }
+        /* ===== 基本設定 ===== */
 
         * {
             box-sizing: border-box;
@@ -39,36 +21,28 @@
         }
 
         body {
-            font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
-            background: var(--bg-main);
-            color: var(--text-secondary);
+            font-family:
+                "Noto Sans TC",
+                "Microsoft JhengHei",
+                Arial,
+                sans-serif;
+
+            background: #F5F1EA;
+            color: #5B625D;
             line-height: 1.8;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
         }
 
-        /* 滾動漸顯動畫 */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        /* ===== 頂部導覽列 ===== */
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* 導覽列 */
         .navbar {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(245, 241, 234, 0.92);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 16px 24px;
+            background: rgba(245, 241, 234, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #E5DED3;
+            padding: 15px 24px;
         }
 
         .nav-container {
@@ -81,36 +55,30 @@
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 28px;
             list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-secondary);
+            color: #59635D;
             font-weight: 500;
-            font-size: 15px;
             position: relative;
             padding-bottom: 4px;
-            transition: color 0.3s ease;
+            transition: color 0.3s;
+            cursor: pointer;
         }
 
+        /* 動態底線懸停與當前區域高亮效果 */
         .nav-links a::after {
             content: '';
             position: absolute;
+            width: 0;
+            height: 2px;
             bottom: 0;
             left: 0;
-            width: 0%;
-            height: 2px;
-            background-color: var(--accent-warm);
-            border-radius: 1px;
-            transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--text-primary);
-            font-weight: 600;
+            background-color: #8C8275;
+            transition: width 0.3s ease-in-out;
         }
 
         .nav-links a:hover::after,
@@ -118,10 +86,23 @@
             width: 100%;
         }
 
-        /* Hero 區塊 */
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #8C8275;
+            font-weight: 600;
+        }
+
+
+        /* ===== 首頁 HERO ===== */
+
         .hero {
-            background: var(--bg-hero);
-            padding: 100px 24px 90px;
+            background: linear-gradient(
+                135deg,
+                #E8E3DA,
+                #DDE5DF
+            );
+
+            padding: 90px 24px 80px;
         }
 
         .hero-container {
@@ -131,10 +112,8 @@
 
         .hero h1 {
             font-size: 52px;
-            color: var(--text-primary);
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-            font-weight: 700;
+            color: #4F5A54;
+            margin-bottom: 10px;
             display: inline-block;
             position: relative;
         }
@@ -142,79 +121,98 @@
         .hero h1::after {
             content: '';
             position: absolute;
+            width: 0;
+            height: 3px;
             bottom: -4px;
             left: 0;
-            width: 0%;
-            height: 3px;
-            background-color: var(--text-secondary);
-            border-radius: 2px;
-            transition: width 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+            background-color: #747B75;
+            transition: width 0.4s ease-in-out;
         }
 
         .hero h1:hover::after {
             width: 100%;
         }
 
-        /* 副標題 Hover 特效：字距優雅舒展 + 柔光發光（無底框） */
+        /* 副標題 Hover 特效：字距優雅舒展 + 柔光發光 */
         .hero h2 {
             font-size: 22px;
             font-weight: 400;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            display: block;
-            margin-top: 4px;
-            transition: color 0.4s ease, letter-spacing 0.45s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.4s ease;
+            color: #747B75;
+            display: inline-block;
+            letter-spacing: 0px;
+            transition: color 0.4s ease, letter-spacing 0.4s ease, text-shadow 0.4s ease;
             cursor: default;
         }
 
         .hero h2:hover {
-            color: var(--text-primary);
-            letter-spacing: 3.5px;
-            text-shadow: 0 0 12px rgba(116, 123, 117, 0.38), 0 0 24px rgba(116, 123, 117, 0.2);
+            color: #434B46;
+            letter-spacing: 2.5px;
+            text-shadow: 0 0 12px rgba(116, 123, 117, 0.35);
         }
+
+
+        /* ===== 共用區塊與分頁控制 ===== */
 
         section {
             max-width: 1100px;
             margin: auto;
-            padding: 80px 24px;
+            padding: 70px 24px;
+        }
+
+        /* 💥 分頁控制 CSS 💥 */
+        .tab-content {
+            display: none; /* 預設隱藏所有分頁 */
+        }
+
+        .tab-content.active {
+            display: block; /* 只顯示目前被選中的分頁 */
+            animation: fadeIn 0.4s ease-in-out; /* 切換時帶有淡入淡出效果 */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .section-title {
             font-size: 30px;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            font-weight: 700;
+            color: #59635D;
+            margin-bottom: 24px;
             position: relative;
             display: inline-block;
-            cursor: pointer;
-            padding-bottom: 6px;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 45px;
+            width: 0;
             height: 3px;
+            bottom: -6px;
+            left: 0;
             background-color: #B5ACA0;
-            border-radius: 2px;
-            transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+            transition: width 0.35s ease-in-out;
         }
 
         .section-title:hover::after {
             width: 100%;
-            background-color: var(--text-secondary);
         }
 
-        /* 關於我：Radial Spotlight 跟隨卡片 */
+
+        /* ===== 關於我 (含微光游標跟隨) ===== */
+
         .about-card {
             position: relative;
-            background: var(--bg-card);
-            padding: 42px;
+            background: #FFFDF9;
+            padding: 40px;
             border-radius: 18px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-soft);
+            border: 1px solid #E5DED3;
+            box-shadow: 0 4px 15px rgba(93, 88, 78, 0.04);
             overflow: hidden;
             transition: border-color 0.35s ease, box-shadow 0.35s ease;
         }
@@ -227,9 +225,9 @@
             right: 0;
             bottom: 0;
             background: radial-gradient(
-                550px circle at var(--x, 50%) var(--y, 50%),
-                rgba(216, 208, 197, 0.42),
-                transparent 55%
+                500px circle at var(--x, 50%) var(--y, 50%),
+                rgba(216, 208, 197, 0.35),
+                transparent 50%
             );
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -242,8 +240,8 @@
         }
 
         .about-card:hover {
-            border-color: var(--border-hover);
-            box-shadow: 0 12px 30px rgba(93, 88, 78, 0.08);
+            border-color: #C8BFB3;
+            box-shadow: 0 10px 30px rgba(93, 88, 78, 0.08);
         }
 
         .about-card p {
@@ -259,142 +257,114 @@
             margin-bottom: 0;
         }
 
-        /* 專案區塊 */
+
+        /* ===== 專案經歷 ===== */
+
         .projects {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 28px;
-            align-items: stretch;
         }
 
         .project-card {
-            background: var(--bg-card);
-            padding: 36px;
+            background: #FFFDF9;
+            padding: 35px;
             border-radius: 18px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #E5DED3;
+            display: flex;
+            flex-direction: column;
+            position: relative;
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
                         box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
                         border-color 0.35s ease;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
         }
 
         .project-card:hover {
             transform: translateY(-8px);
             border-color: #B5ACA0;
-            box-shadow: var(--shadow-hover);
+            box-shadow: 0 16px 32px rgba(93, 88, 78, 0.1);
         }
 
         .project-card.clickable {
             cursor: pointer;
         }
 
-        /* 專案卡片封面圖容器 (尺寸與輪播容器 380px 保持一致) */
-        .project-img-container {
-            position: relative;
-            width: 100%;
-            height: 380px;
-            background: #F1EDE6;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 22px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .project-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover .project-img-container img {
-            transform: scale(1.02);
-        }
-
         .project-card h3 {
             font-size: 22px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            line-height: 1.4;
-            font-weight: 700;
+            color: #59635D;
+            margin-bottom: 15px;
         }
 
         .project-card p {
             color: #77756F;
             margin-bottom: 0;
-            text-align: justify;
-            font-size: 15px;
         }
 
         .project-card .section-subtitle {
             display: inline-block;
-            background: var(--accent-light);
+            background: #E8DED8;
             color: #786C67;
             padding: 4px 13px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
-            margin-bottom: 18px;
+            margin-bottom: 15px;
             align-self: flex-start;
         }
 
-        .card-action-hint {
-            margin-top: 20px;
-            display: inline-flex;
+
+        /* ===== 專案 1 頂部封面圖容器 ===== */
+
+        .project-cover-container {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            background: #F1EDE6;
+            border-radius: 12px;
+            margin-bottom: 22px;
+            overflow: hidden;
+            display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--accent-warm);
-            transition: color 0.25s ease, transform 0.25s ease;
+            justify-content: center;
         }
 
-        .project-card:hover .card-action-hint {
-            color: var(--text-primary);
-            transform: translateX(4px);
+        .project-cover-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-        /* 相片輪播 (Carousel) */
+        .project-cover-container img:hover {
+            transform: scale(1.02);
+        }
+
+
+        /* ===== 專案 2 輪播容器 (Carousel) ===== */
+
         .carousel-container {
             position: relative;
             width: 100%;
             height: 380px;
             background: #F1EDE6;
             border-radius: 12px;
-            overflow: hidden;
             margin-bottom: 22px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
-            user-select: none;
-            touch-action: pan-y;
-        }
-
-        .carousel-track {
-            display: flex;
-            height: 100%;
-            transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+            overflow: hidden;
         }
 
         .carousel-slide {
-            min-width: 100%;
+            width: 100%;
             height: 100%;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #F1EDE6;
+            transition: transform 0.4s ease-in-out;
         }
 
         .carousel-slide img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            border-radius: 12px;
+            flex-shrink: 0;
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -407,29 +377,27 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(89, 99, 93, 0.65);
+            background: rgba(89, 99, 93, 0.6);
             color: #FFFDF9;
             border: none;
-            width: 42px;
-            height: 42px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
+            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            transition: background 0.25s, transform 0.2s;
+            transition: 0.2s;
             z-index: 10;
-            backdrop-filter: blur(4px);
         }
 
         .carousel-btn:hover {
             background: rgba(89, 99, 93, 0.9);
-            transform: translateY(-50%) scale(1.08);
         }
 
-        .carousel-btn.prev { left: 14px; }
-        .carousel-btn.next { right: 14px; }
+        .carousel-btn.prev { left: 12px; }
+        .carousel-btn.next { right: 12px; }
 
         .carousel-dots {
             position: absolute;
@@ -439,47 +407,45 @@
             display: flex;
             gap: 8px;
             z-index: 10;
-            background: rgba(245, 241, 234, 0.75);
-            padding: 6px 12px;
-            border-radius: 20px;
-            backdrop-filter: blur(4px);
         }
 
         .dot {
-            width: 9px;
-            height: 9px;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            background: rgba(89, 99, 93, 0.35);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: 0.2s;
         }
 
         .dot.active {
-            background: var(--text-secondary);
-            width: 22px;
+            background: #FFFDF9;
+            width: 20px;
             border-radius: 10px;
         }
 
-        /* 打工經歷時間軸 */
+
+        /* ===== 打工經歷（時間軸） ===== */
+
         .timeline {
             position: relative;
-            padding-left: 32px;
+            padding-left: 30px;
             margin-top: 10px;
         }
 
         .timeline::before {
             content: '';
             position: absolute;
-            left: 9px;
-            top: 12px;
-            bottom: 12px;
+            left: 8px;
+            top: 10px;
+            bottom: 10px;
             width: 2px;
             background: #D8D0C5;
         }
 
         .timeline-item {
             position: relative;
-            margin-bottom: 28px;
+            margin-bottom: 30px;
         }
 
         .timeline-item:last-child {
@@ -488,203 +454,64 @@
 
         .timeline-dot {
             position: absolute;
-            left: -32px;
+            left: -30px;
             top: 24px;
             width: 14px;
             height: 14px;
             border-radius: 50%;
             background: #B5ACA0;
-            border: 3px solid var(--bg-main);
+            border: 3px solid #F5F1EA;
             box-shadow: 0 0 0 2px #B5ACA0;
-            transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
         .timeline-item:hover .timeline-dot {
-            background: var(--text-secondary);
-            box-shadow: 0 0 0 2px var(--text-secondary);
-            transform: scale(1.15);
+            background: #59635D;
+            box-shadow: 0 0 0 2px #59635D;
         }
 
         .timeline-content {
-            background: var(--bg-card);
+            background: #FFFDF9;
             padding: 24px 30px;
             border-radius: 16px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #E5DED3;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.25s, box-shadow 0.25s;
         }
 
         .timeline-content:hover {
-            transform: translateX(8px);
-            border-color: #C8BFB3;
+            transform: translateX(6px);
             box-shadow: 0 8px 25px rgba(93, 88, 78, 0.08);
         }
 
         .job-title {
-            font-size: 19px;
-            font-weight: 700;
-            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 600;
+            color: #4F5A54;
             margin-bottom: 4px;
         }
 
         .company-name {
             font-size: 15px;
-            color: var(--accent-warm);
-            font-weight: 500;
+            color: #8C8275;
         }
 
         .job-period {
-            background: var(--accent-light);
+            background: #E8DED8;
             color: #786C67;
-            padding: 5px 15px;
+            padding: 5px 14px;
             border-radius: 20px;
             font-size: 13.5px;
             font-weight: 600;
             white-space: nowrap;
         }
 
-        /* 專案詳情彈窗 (Project Detail Modal) */
-        .project-modal {
-            display: none;
-            position: fixed;
-            z-index: 950;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(79, 90, 84, 0.45);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
-            overflow-y: auto;
-        }
 
-        .project-modal-content {
-            background: var(--bg-card);
-            border-radius: 20px;
-            width: 100%;
-            max-width: 820px;
-            max-height: 90vh;
-            overflow-y: auto;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 20px 50px rgba(79, 90, 84, 0.22);
-            padding: 40px;
-            position: relative;
-            animation: modalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        /* ===== 彈出詳情 Modal 樣式 ===== */
 
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95) translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .project-modal-close {
-            position: absolute;
-            top: 24px;
-            right: 28px;
-            font-size: 32px;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: color 0.2s, transform 0.2s;
-            line-height: 1;
-        }
-
-        .project-modal-close:hover {
-            color: var(--text-primary);
-            transform: scale(1.1);
-        }
-
-        .project-detail-header {
-            margin-bottom: 24px;
-        }
-
-        .project-detail-header h2 {
-            font-size: 25px;
-            color: var(--text-primary);
-            line-height: 1.4;
-            font-weight: 700;
-            margin-top: 10px;
-        }
-
-        .project-detail-img-wrapper {
-            width: 100%;
-            background: #F1EDE6;
-            border-radius: 14px;
-            padding: 16px;
-            text-align: center;
-            margin-bottom: 28px;
-            border: 1px solid var(--border-color);
-        }
-
-        .project-detail-img {
-            max-width: 100%;
-            max-height: 360px;
-            object-fit: contain;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .project-detail-img:hover {
-            transform: scale(1.02);
-        }
-
-        .img-hint-text {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 8px;
-        }
-
-        /* 4 大亮點區塊 Grid 排版 */
-        .highlights-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-            margin-top: 20px;
-        }
-
-        .highlight-card {
-            background: var(--accent-pill-bg);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 14px;
-            transition: transform 0.25s ease, border-color 0.25s ease;
-        }
-
-        .highlight-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--border-hover);
-        }
-
-        .highlight-title {
-            font-size: 16.5px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .highlight-desc {
-            font-size: 14.5px;
-            color: #636B65;
-            line-height: 1.6;
-            text-align: justify;
-        }
-
-        /* 圖片全螢幕放大 Lightbox */
-        .image-modal {
+        .modal-overlay {
             display: none;
             position: fixed;
             z-index: 1000;
@@ -692,18 +519,135 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(232, 227, 218, 0.95);
+            background: rgba(89, 99, 93, 0.55);
+            backdrop-filter: blur(6px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal-card {
+            background: #FFFDF9;
+            width: 100%;
+            max-width: 820px;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid #E5DED3;
+            animation: modalPop 0.3s ease-out;
+        }
+
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 32px;
+            color: #747B75;
+            cursor: pointer;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        .modal-close-btn:hover {
+            color: #4F5A54;
+        }
+
+        .modal-img-wrapper {
+            width: 100%;
+            max-height: 380px;
+            background: #F1EDE6;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            color: #4F5A54;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .modal-desc {
+            color: #606863;
+            font-size: 15px;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .modal-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .highlight-item {
+            background: #F5F1EA;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #E5DED3;
+        }
+
+        .highlight-item h4 {
+            font-size: 16px;
+            color: #4F5A54;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .highlight-item p {
+            font-size: 13.5px;
+            color: #747B75;
+            line-height: 1.6;
+        }
+
+
+        /* ===== 圖片單獨放大 Modal ===== */
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(232, 227, 218, 0.92);
             justify-content: center;
             align-items: center;
             padding: 40px;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
         }
 
         .image-modal img {
             width: auto;
-            max-width: 88%;
-            max-height: 85vh;
+            max-width: 85%;
+            max-height: 85%;
             object-fit: contain;
             border-radius: 12px;
             box-shadow: 0 15px 40px rgba(93, 88, 78, 0.18);
@@ -713,25 +657,22 @@
             position: absolute;
             top: 25px;
             right: 35px;
-            color: var(--text-secondary);
+            color: #59635D;
             font-size: 38px;
             cursor: pointer;
             font-weight: 300;
-            transition: color 0.2s;
         }
 
-        .close-button:hover {
-            color: var(--text-primary);
-        }
 
-        /* 回到頂部按鈕 */
+        /* ===== 回到頂部按鈕 ===== */
+
         .back-to-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
             width: 48px;
             height: 48px;
-            background: rgba(89, 99, 93, 0.8);
+            background: rgba(89, 99, 93, 0.75);
             color: #FFFDF9;
             border: none;
             border-radius: 50%;
@@ -740,11 +681,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 6px 20px rgba(93, 88, 78, 0.18);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
             backdrop-filter: blur(4px);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease, background-color 0.2s ease;
             z-index: 90;
         }
 
@@ -754,28 +695,29 @@
         }
 
         .back-to-top:hover {
-            background: rgba(89, 99, 93, 0.98);
+            background: rgba(89, 99, 93, 0.95);
             transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(93, 88, 78, 0.25);
         }
 
+
+        /* ===== Footer 色塊 ===== */
+
         footer {
-            background: var(--text-secondary);
-            color: #E8E3DA;
-            text-align: center;
-            padding: 25px;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-            margin-top: 50px;
+            background: #59635D;
+            height: 40px;
+            margin-top: 60px;
         }
+
+
+        /* ===== 手機版 RWD ===== */
 
         @media (max-width: 768px) {
             .hero {
-                padding: 70px 24px;
+                padding: 60px 24px;
             }
 
             .hero h1 {
-                font-size: 38px;
+                font-size: 40px;
             }
 
             .hero h2 {
@@ -786,24 +728,21 @@
                 grid-template-columns: 1fr;
             }
 
-            .highlights-grid {
-                grid-template-columns: 1fr;
-            }
-
             section {
-                padding: 55px 20px;
+                padding: 50px 20px;
             }
 
-            .carousel-container {
+            .carousel-container,
+            .project-cover-container {
                 height: 280px;
             }
 
             .about-card {
-                padding: 28px;
+                padding: 25px;
             }
 
-            .project-modal-content {
-                padding: 28px 20px;
+            .modal-highlights {
+                grid-template-columns: 1fr;
             }
 
             .timeline-content {
@@ -826,24 +765,30 @@
 
 <body>
 
+    <!-- 頂部導覽列（分頁切換按鈕） -->
     <nav class="navbar">
         <div class="nav-container">
             <ul class="nav-links">
-                <li><a href="#about">關於我</a></li>
-                <li><a href="#projects">專案經歷</a></li>
-                <li><a href="#experience">打工經歷</a></li>
+                <!-- 💥 新增 onclick 觸發 switchTab 分頁函數 💥 -->
+                <li><a class="nav-item active" onclick="switchTab('about')">關於我</a></li>
+                <li><a class="nav-item" onclick="switchTab('projects')">專案經歷</a></li>
+                <li><a class="nav-item" onclick="switchTab('experience')">打工經歷</a></li>
             </ul>
         </div>
     </nav>
 
+    <!-- 首頁 Hero -->
     <header class="hero">
         <div class="hero-container">
             <h1>楊琦如</h1>
+            <br>
             <h2>銘傳大學｜人工智慧應用學系</h2>
         </div>
     </header>
 
-    <section id="about" class="reveal">
+
+    <!-- ===== 分頁 1：關於我 ===== -->
+    <section id="about" class="tab-content active">
         <h2 class="section-title">關於我</h2>
         <div class="about-card" id="aboutCard">
             <p>
@@ -858,69 +803,44 @@
         </div>
     </section>
 
-    <section id="projects" class="reveal">
+
+    <!-- ===== 分頁 2：專案經歷 ===== -->
+    <section id="projects" class="tab-content">
         <h2 class="section-title">專案經歷</h2>
 
         <div class="projects">
 
-            <!-- 專案 1：碩士論文 (點擊觸發專案詳情彈窗) -->
-            <div class="project-card clickable" onclick="openProjectModal()">
-                <div class="project-img-container">
-                    <img src="圖片.png" alt="相對運動場景下之車牌辨識 封面圖" 
-                         onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=%E8%BB%8A%E7%89%8C%E8%BE%A8%E8%AD%98+%E5%9C%96%E7%89%871.png';" />
+            <!-- 專案 1 -->
+            <div class="project-card clickable" onclick="openProjectDetailModal()">
+                <div class="project-cover-container">
+                    <img src="1702008084283(1).jpg" alt="碩士論文專案封面" onclick="event.stopPropagation(); openImageModal(this.src)">
                 </div>
+
                 <h3>
                     相對運動場景下之車牌辨識：
                     結合橫向動態模糊補償與時間序列特徵分析
                 </h3>
                 <span class="section-subtitle">碩士論文</span>
                 <p>
-                    針對移動拍攝情境下產生的動態模糊與辨識不穩定問題，建置包含車牌偵測、影像去模糊、清晰度判斷、字元辨識及時間序列分析的完整辨識流程。
+                    針對移動拍攝情境下產生的動態模糊與辨識不穩定問題，建置包含車牌偵測、影像去模糊、清晰度判斷、字元辨識及時間序列分析的完整辨識流程。點擊卡片可查看詳細專案亮點說明。
                 </p>
             </div>
 
-            <!-- 專案 2：VR 專題（含相片輪播 Carousel） -->
+            <!-- 專案 2 (含圖片輪播) -->
             <div class="project-card">
-                <div class="carousel-container" id="vrCarousel" onmouseenter="pauseAutoPlay()" onmouseleave="startAutoPlay()">
-                    <div class="carousel-track" id="carouselTrack">
-                        <!-- 封面圖 (1) -->
-                        <div class="carousel-slide">
-                            <img src="1702008084283(1).jpg" alt="彩繪社區 VR 專案封面" 
-                                 onclick="openModal(this.src)"
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Cover+1702008084283(1)';" />
-                        </div>
-                        <!-- 輪播圖 2 -->
-                        <div class="carousel-slide">
-                            <img src="1024x768 (1).jpg" alt="彩繪社區 VR 展示圖 1" 
-                                 onclick="openModal(this.src)"
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(1)';" />
-                        </div>
-                        <!-- 輪播圖 3 -->
-                        <div class="carousel-slide">
-                            <img src="1024x768 (2).jpg" alt="彩繪社區 VR 展示圖 2" 
-                                 onclick="openModal(this.src)"
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(2)';" />
-                        </div>
-                        <!-- 輪播圖 4 -->
-                        <div class="carousel-slide">
-                            <img src="1024x768 (3).jpg" alt="彩繪社區 VR 展示圖 3" 
-                                 onclick="openModal(this.src)"
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(3)';" />
-                        </div>
-                        <!-- 輪播圖 5 -->
-                        <div class="carousel-slide">
-                            <img src="1024x768 (4).jpg" alt="彩繪社區 VR 展示圖 4" 
-                                 onclick="openModal(this.src)"
-                                 onerror="this.onerror=null; this.src='https://placehold.co/1024x768/E8DED8/59635D?text=VR+Scene+1024x768+(4)';" />
-                        </div>
+                <div class="carousel-container" id="carouselContainer">
+                    <div class="carousel-slide" id="carouselSlide">
+                        <img src="1702008084283(1).jpg" alt="封面圖" onclick="openImageModal(this.src)">
+                        <img src="1024x768 (1).jpg" alt="圖片 1" onclick="openImageModal(this.src)">
+                        <img src="1024x768 (2).jpg" alt="圖片 2" onclick="openImageModal(this.src)">
+                        <img src="1024x768 (3).jpg" alt="圖片 3" onclick="openImageModal(this.src)">
+                        <img src="1024x768 (4).jpg" alt="圖片 4" onclick="openImageModal(this.src)">
                     </div>
 
-                    <!-- 左右切換按鈕 -->
-                    <button class="carousel-btn prev" onclick="moveSlide(-1)" aria-label="上一張圖片">&#10094;</button>
-                    <button class="carousel-btn next" onclick="moveSlide(1)" aria-label="下一張圖片">&#10095;</button>
+                    <button class="carousel-btn prev" onclick="prevSlide()">&#10094;</button>
+                    <button class="carousel-btn next" onclick="nextSlide()">&#10095;</button>
 
-                    <!-- 下方指示點 -->
-                    <div class="carousel-dots" id="carouselDots">
+                    <div class="carousel-dots">
                         <span class="dot active" onclick="goToSlide(0)"></span>
                         <span class="dot" onclick="goToSlide(1)"></span>
                         <span class="dot" onclick="goToSlide(2)"></span>
@@ -932,14 +852,16 @@
                 <h3>彩繪社區之 VR 虛擬實境應用</h3>
                 <span class="section-subtitle">大學小組專題</span>
                 <p>
-                    使用MAYA進行3D場景建模，並透過Unity建置彩繪社區VR虛擬實境，結合實地景觀與彩繪內容，打造沉浸式導覽與互動體驗。
+                    使用MAYA進行3D場景建模，並透過Unity建置彩繪社區VR虛擬實境，結合實地景觀與彩繪內容，打造沉浸式導覽與互動體驗，達到社區特色數位保存與推廣之目的。
                 </p>
             </div>
 
         </div>
     </section>
 
-    <section id="experience" class="reveal">
+
+    <!-- ===== 分頁 3：打工經歷 ===== -->
+    <section id="experience" class="tab-content">
         <h2 class="section-title">打工經歷</h2>
 
         <div class="timeline">
@@ -983,79 +905,85 @@
         </div>
     </section>
 
-    <!-- 專案 1 詳情彈窗 (Project Detail Modal) -->
-    <div id="projectDetailModal" class="project-modal" onclick="closeProjectModal()">
-        <div class="project-modal-content" onclick="event.stopPropagation()">
-            <span class="project-modal-close" onclick="closeProjectModal()">&times;</span>
+
+    <!-- ===== 專案 1 詳情彈出視窗 Modal ===== -->
+    <div id="projectDetailModal" class="modal-overlay" onclick="closeProjectDetailModal()">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <span class="modal-close-btn" onclick="closeProjectDetailModal()">&times;</span>
             
-            <div class="project-detail-header">
-                <span class="section-subtitle" style="margin-bottom: 8px;">碩士論文</span>
-                <h2>相對運動場景下之車牌辨識：結合橫向動態模糊補償與時間序列特徵分析</h2>
+            <div class="modal-img-wrapper">
+                <img src="圖片1.png" alt="碩士論文架構圖" onclick="openImageModal(this.src)" style="cursor: pointer;">
             </div>
 
-            <!-- 代表圖片 圖片1.png -->
-            <div class="project-detail-img-wrapper">
-                <img src="圖片1.png" alt="車牌辨識專案架構與結果圖片1" class="project-detail-img" 
-                     onclick="openModal(this.src)"
-                     onerror="this.onerror=null; this.src='https://placehold.co/900x500/E8DED8/59635D?text=%E8%BB%8A%E7%89%8C%E8%BE%A8%E8%AD%98%E5%B0%88%E6%A1%88+%E5%9C%96%E7%89%871.png';" />
-            </div>
+            <h3 class="modal-title">相對運動場景下之車牌辨識：結合橫向動態模糊補償與時間序列特徵分析</h3>
+            <p class="modal-desc">
+                針對移動拍攝情境下產生的動態模糊與辨識不穩定問題，建置包含車牌偵測、影像去模糊、清晰度判斷、字元辨識及時間序列分析的完整辨識流程。研究過程中，主要使用Python進行相關實驗，並應用YOLO進行車牌與字元偵測。
+            </p>
 
-            <!-- 4 大核心亮點 -->
-            <div class="highlights-grid">
-                
-                <div class="highlight-card">
-                    <div class="highlight-title">
-                        移動攝影機環境適用
-                    </div>
-                    <div class="highlight-desc">
-                        適用於移動的攝影機環境，使應用彈性更大。
-                    </div>
+            <div class="modal-highlights">
+                <div class="highlight-item">
+                    <h4>📷 移動攝影機環境適用</h4>
+                    <p>適用於移動的攝影機環境，使應用彈性更大。</p>
                 </div>
-
-                <div class="highlight-card">
-                    <div class="highlight-title">
-                        克服橫向模糊問題
-                    </div>
-                    <div class="highlight-desc">
-                        克服橫向拍攝的影像模糊問題，更適於道路行駛中的辨識應用。
-                    </div>
+                <div class="highlight-item">
+                    <h4>🚗 克服橫向模糊問題</h4>
+                    <p>克服橫向拍攝的影像模糊問題，更適於道路行駛中的辨識應用。</p>
                 </div>
-
-                <div class="highlight-card">
-                    <div class="highlight-title">
-                        影片序列辨識更強健
-                    </div>
-                    <div class="highlight-desc">
-                        基於影片的辨識演算法，較單張影像辨識更具強健性。
-                    </div>
+                <div class="highlight-item">
+                    <h4>📹 影片序列辨識更強健</h4>
+                    <p>基於影片的辨識演算法，較單張影像辨識更具強健性。</p>
                 </div>
-
-                <div class="highlight-card">
-                    <div class="highlight-title">
-                        台灣在地化資料庫
-                    </div>
-                    <div class="highlight-desc">
-                        自建以台灣機車車牌為辨識目標的影像資料庫，更貼切於本地應用需求。
-                    </div>
+                <div class="highlight-item">
+                    <h4>🛵 台灣在地化資料庫</h4>
+                    <p>自建以台灣機車車牌為辨識目標的影像資料庫，更貼切於本地應用需求。</p>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <!-- 圖片全螢幕燈箱 Modal -->
-    <div id="imageModal" class="image-modal" onclick="closeModal()">
-        <span class="close-button" onclick="closeModal()">&times;</span>
+
+    <!-- ===== 共用單張圖片放大 Modal ===== -->
+    <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+        <span class="close-button" onclick="closeImageModal()">&times;</span>
         <img id="modalImg" src="" alt="放大圖片" onclick="event.stopPropagation()">
     </div>
 
-    <!-- 回到頂部按鈕 -->
+
+    <!-- ===== 回到頂部按鈕 ===== -->
     <button id="backToTop" class="back-to-top" onclick="scrollToTop()" title="回到頂部">↑</button>
 
+
+    <!-- ===== Footer ===== -->
     <footer></footer>
 
+
+    <!-- ===== JavaScript ===== -->
     <script>
-        /* ===== 1. 關於我卡片：微光游標跟隨 (Radial Spotlight) ===== */
+        /* --- 💥 1. 單頁 Tab 分頁切換核心邏輯 💥 --- */
+        function switchTab(tabId) {
+            // A. 隱藏所有分頁 (.tab-content)
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // B. 顯示點擊目標分頁
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+
+            // C. 更新導覽列按鈕高亮狀態
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            // 抓取觸發點擊的導覽列項目
+            event.target.classList.add('active');
+
+            // D. 切換分頁時平滑捲動回上方
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+
+        /* --- 2. 關於我卡片：微光游標跟隨 (Radial Spotlight) --- */
         const aboutCard = document.getElementById('aboutCard');
         if (aboutCard) {
             aboutCard.addEventListener('mousemove', (e) => {
@@ -1068,141 +996,12 @@
             });
         }
 
-        /* ===== 2. 滾動漸顯動畫 (Scroll Reveal) ===== */
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.12 });
 
-        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-        /* ===== 3. 頂部導覽列 Scrollspy (自動高亮當前區塊) ===== */
-        const sections = document.querySelectorAll("section[id]");
-        const navLinks = document.querySelectorAll(".nav-links a");
-
-        const navObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute("id");
-                    navLinks.forEach(link => {
-                        link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
-                    });
-                }
-            });
-        }, { rootMargin: "-25% 0px -50% 0px" });
-
-        sections.forEach(section => navObserver.observe(section));
-
-        /* ===== 4. 專案 1 詳情彈窗邏輯 ===== */
-        function openProjectModal() {
-            document.getElementById("projectDetailModal").style.display = "flex";
-            document.body.style.overflow = "hidden"; // 防止背景滾動
-        }
-
-        function closeProjectModal() {
-            document.getElementById("projectDetailModal").style.display = "none";
-            document.body.style.overflow = "auto";
-        }
-
-        /* ===== 5. 相片輪播 (Carousel) 與觸控手勢控制 ===== */
-        let currentSlide = 0;
-        const totalSlides = 5;
-        let autoPlayTimer = null;
-
-        function updateCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const dots = document.querySelectorAll('#carouselDots .dot');
-
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        function moveSlide(direction) {
-            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-            updateCarousel();
-        }
-
-        function goToSlide(slideIndex) {
-            currentSlide = slideIndex;
-            updateCarousel();
-        }
-
-        function startAutoPlay() {
-            if (!autoPlayTimer) {
-                autoPlayTimer = setInterval(() => {
-                    moveSlide(1);
-                }, 4000);
-            }
-        }
-
-        function pauseAutoPlay() {
-            if (autoPlayTimer) {
-                clearInterval(autoPlayTimer);
-                autoPlayTimer = null;
-            }
-        }
-
-        // 手勢觸控體驗 (Touch Swipe)
-        let touchStartX = 0;
-        let touchEndX = 0;
-        const carouselContainer = document.getElementById('vrCarousel');
-
-        carouselContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-            pauseAutoPlay();
-        }, { passive: true });
-
-        carouselContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-            startAutoPlay();
-        }, { passive: true });
-
-        function handleSwipe() {
-            const swipeThreshold = 40;
-            if (touchStartX - touchEndX > swipeThreshold) {
-                moveSlide(1);
-            } else if (touchEndX - touchStartX > swipeThreshold) {
-                moveSlide(-1);
-            }
-        }
-
-        /* ===== 6. Modal 全螢幕放大圖片燈箱控制 ===== */
-        function openModal(imgSrc) {
-            const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("modalImg");
-
-            modalImg.src = imgSrc;
-            modalImg.onerror = function() {
-                this.onerror = null;
-                this.src = 'https://placehold.co/900x600/E8DED8/59635D?text=%E5%9C%96%E7%89%87%E6%94%BE%E5%A4%A7%E6%AA%A2%E8%A6%96';
-            };
-            modal.style.display = "flex";
-        }
-
-        function closeModal() {
-            document.getElementById("imageModal").style.display = "none";
-        }
-
-        // 按 ESC 鍵可關閉所有彈窗
-        document.addEventListener('keydown', (e) => {
-            if (e.key === "Escape") {
-                closeModal();
-                closeProjectModal();
-            }
-        });
-
-        /* ===== 7. 回到頂部按鈕邏輯 ===== */
+        /* --- 3. 回到頂部按鈕顯示邏輯 --- */
         const backToTopBtn = document.getElementById("backToTop");
 
         window.addEventListener("scroll", () => {
-            if (window.scrollY > 400) {
+            if (window.scrollY > window.innerHeight) {
                 backToTopBtn.classList.add("show");
             } else {
                 backToTopBtn.classList.remove("show");
@@ -1216,10 +1015,87 @@
             });
         }
 
-        // 頁面載入完成後啟動自動輪播
-        window.addEventListener('load', () => {
-            startAutoPlay();
-        });
+
+        /* --- 4. 專案 2 輪播與手勢滑動邏輯 --- */
+        let currentSlide = 0;
+        const totalSlides = 5;
+
+        function updateSlide() {
+            const slide = document.getElementById("carouselSlide");
+            const dots = document.querySelectorAll(".dot");
+
+            if (slide) {
+                slide.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle("active", index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlide();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlide();
+        }
+
+        // 手機觸控滑動支援
+        const carouselContainer = document.getElementById("carouselContainer");
+        let startX = 0;
+        let endX = 0;
+
+        if (carouselContainer) {
+            carouselContainer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            }, { passive: true });
+
+            carouselContainer.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                handleSwipe();
+            }, { passive: true });
+        }
+
+        function handleSwipe() {
+            const threshold = 40;
+            if (startX - endX > threshold) {
+                nextSlide();
+            } else if (endX - startX > threshold) {
+                prevSlide();
+            }
+        }
+
+
+        /* --- 5. 專案 1 詳情 Modal 邏輯 --- */
+        function openProjectDetailModal() {
+            document.getElementById("projectDetailModal").style.display = "flex";
+        }
+
+        function closeProjectDetailModal() {
+            document.getElementById("projectDetailModal").style.display = "none";
+        }
+
+
+        /* --- 6. 單張圖片放大 Modal 邏輯 --- */
+        function openImageModal(imgSrc) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImg");
+
+            modalImg.src = imgSrc;
+            modal.style.display = "flex";
+        }
+
+        function closeImageModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
     </script>
 
 </body>
