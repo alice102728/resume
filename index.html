@@ -640,34 +640,6 @@
             color: #FFFDF9;
         }
 
-        /* ===== 複製成功 Toast 提示特效 ===== */
-
-        .toast {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: rgba(79, 90, 84, 0.92);
-            color: #FFFDF9;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 14.5px;
-            font-weight: 500;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-            backdrop-filter: blur(6px);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-            z-index: 1000;
-            pointer-events: none;
-        }
-
-        .toast.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
 
         /* ===== 彈出詳情 Modal 樣式 ===== */
 
@@ -1084,8 +1056,7 @@
 
     <!-- ===== 分頁 4：連絡我 ===== -->
     <section id="contact" class="tab-content">
-        <h2 class="section-title">連絡我</h2>
-        <p class="contact-intro">如果您對我的研究、專案或經歷有興趣，歡迎透過以下方式隨時與我聯繫！</p>
+        <h2 class="section-title">連絡</h2>
 
         <div class="contact-grid">
 
@@ -1103,10 +1074,6 @@
                         <div class="contact-value">alice102728@gmail.com</div>
                     </div>
                 </div>
-                <div class="contact-actions">
-                    <a href="mailto:alice102728@gmail.com" class="btn-action primary">發送郵件</a>
-                    <button class="btn-action secondary" onclick="copyToClipboard('alice102728@gmail.com', this)">複製郵件</button>
-                </div>
             </div>
 
             <!-- 電話卡片 -->
@@ -1121,10 +1088,6 @@
                         <div class="contact-title">Phone</div>
                         <div class="contact-value">0953437617</div>
                     </div>
-                </div>
-                <div class="contact-actions">
-                    <a href="tel:0953437617" class="btn-action primary">撥打電話</a>
-                    <button class="btn-action secondary" onclick="copyToClipboard('0953437617', this)">複製電話</button>
                 </div>
             </div>
 
@@ -1171,11 +1134,6 @@
 
     <!-- ===== 回到頂部按鈕 ===== -->
     <button id="backToTop" class="back-to-top" onclick="scrollToTop()" title="回到頂部">↑</button>
-
-
-    <!-- ===== Toast 提示框 ===== -->
-    <div id="toast" class="toast">已成功複製到剪貼簿！</div>
-
 
     <!-- ===== Footer ===== -->
     <footer></footer>
@@ -1316,25 +1274,6 @@
 
         function closeImageModal() {
             document.getElementById("imageModal").style.display = "none";
-        }
-
-
-        /* --- 7. 一鍵複製與 Toast 提示邏輯 --- */
-        function copyToClipboard(text, btnElement) {
-            navigator.clipboard.writeText(text).then(() => {
-                showToast(`已複製：${text}`);
-                
-                const originalText = btnElement.innerText;
-                btnElement.innerText = "已複製！";
-                btnElement.classList.add("copied");
-
-                setTimeout(() => {
-                    btnElement.innerText = originalText;
-                    btnElement.classList.remove("copied");
-                }, 2000);
-            }).catch(err => {
-                showToast("複製失敗，請手動選取複製");
-            });
         }
 
         function showToast(message) {
