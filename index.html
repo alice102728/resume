@@ -235,8 +235,40 @@
             text-align: justify;
         }
 
-        .about-card p:last-child {
-            margin-bottom: 0;
+        /* 下載 PDF 按鈕樣式 */
+        .download-btn-wrapper {
+            margin-top: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #59635D;
+            color: #FFFDF9;
+            padding: 10px 22px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 12px rgba(89, 99, 93, 0.15);
+        }
+
+        .btn-download:hover {
+            background: #4F5A54;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(89, 99, 93, 0.25);
+        }
+
+        .btn-download svg {
+            transition: transform 0.2s ease;
+        }
+
+        .btn-download:hover svg {
+            transform: translateY(2px);
         }
 
 
@@ -924,6 +956,18 @@
             <p>
                 大學期間曾參與小組專題研究，以VR虛擬實境為主題，使用Maya建立3D場景，並透過Unity建置彩繪社區VR虛擬實境導覽，累積3D場景建置與VR開發經驗。
             </p>
+
+            <!-- 下載 PDF 履歷按鈕 -->
+            <div class="download-btn-wrapper">
+                <a href="楊琦如_履歷.pdf" download="楊琦如_履歷.pdf" class="btn-download">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    下載 PDF 履歷
+                </a>
+            </div>
         </div>
     </section>
 
